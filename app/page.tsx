@@ -9,85 +9,113 @@ import type { Metadata } from "next";
 export const revalidate = 3600;
 
 export async function generateStaticParams() {
-	const pages = await getAllPages();
+  const pages = await getAllPages();
 
-	return pages.map((page) => ({
-		slug: page.slug,
-	}));
+  return pages.map((page) => ({
+    slug: page.slug,
+  }));
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-	const slugs = {
-		en: "home-en",
-		ru: "home-ru",
-	};
-	const lang = siteConfig.site_lang;
-	const slug = slugs[lang];
+  const slugs = {
+    en: "home-en",
+    ru: "home-ru",
+  };
+  const lang = siteConfig.site_lang;
+  const slug = slugs[lang];
 
-	const page = await getPageBySlug(slug);
+  const page = await getPageBySlug(slug);
 
-	if (!page) {
-		return {};
-	}
+  if (!page) {
+    return {};
+  }
 
-	const ogUrl = new URL(`${siteConfig.site_domain}/api/og`);
-	ogUrl.searchParams.append("title", page.title.rendered);
-	// Strip HTML tags for description and limit length
-	const description = page.excerpt?.rendered
-		? page.excerpt.rendered.replace(/<[^>]*>/g, "").trim()
-		: page.content.rendered
-				.replace(/<[^>]*>/g, "")
-				.trim()
-				.slice(0, 200) + "...";
-	ogUrl.searchParams.append("description", description);
+  const ogUrl = new URL(`${siteConfig.site_domain}/api/og`);
+  ogUrl.searchParams.append("title", page.title.rendered);
+  // Strip HTML tags for description and limit length
+  const description = page.excerpt?.rendered
+    ? page.excerpt.rendered.replace(/<[^>]*>/g, "").trim()
+    : page.content.rendered
+        .replace(/<[^>]*>/g, "")
+        .trim()
+        .slice(0, 200) + "...";
+  ogUrl.searchParams.append("description", description);
 
-	return {
-		title: page.title.rendered,
-		description: description,
-		openGraph: {
-			title: page.title.rendered,
-			description: description,
-			type: "article",
-			url: `${siteConfig.site_domain}/pages/${page.slug}`,
-			images: [
-				{
-					url: ogUrl.toString(),
-					width: 1200,
-					height: 630,
-					alt: page.title.rendered,
-				},
-			],
-		},
-		twitter: {
-			card: "summary_large_image",
-			title: page.title.rendered,
-			description: description,
-			images: [ogUrl.toString()],
-		},
-	};
+  return {
+    title: page.title.rendered,
+    description: description,
+    openGraph: {
+      title: page.title.rendered,
+      description: description,
+      type: "article",
+      url: `${siteConfig.site_domain}/pages/${page.slug}`,
+      images: [
+        {
+          url: ogUrl.toString(),
+          width: 1200,
+          height: 630,
+          alt: page.title.rendered,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: page.title.rendered,
+      description: description,
+      images: [ogUrl.toString()],
+    },
+  };
 }
 
 export default async function Page() {
-	const slugs = {
-		en: "home-en",
-		ru: "home-ru",
-	};
-	const lang = siteConfig.site_lang;
-	const slug = slugs[lang];
+  const slugs = {
+    en: "home-en",
+    ru: "home-ru",
+  };
+  const lang = siteConfig.site_lang;
+  const slug = slugs[lang];
 
-	const page = await getPageBySlug(slug);
+  const page = await getPageBySlug(slug);
 
-	return (
-		<div className="flex flex-col">
-			<HeroFront />
-			<Section>
-				<Container>
-					<Prose>
-						<h2>{page.title.rendered}</h2>
-						<div dangerouslySetInnerHTML={{ __html: page.content.rendered }} />
-					</Prose>
-				</Container>
-			</Section>
-		</div>
-	);
+  return (
+    <div className="flex flex-col">
+      <HeroFront />
+      <Section>
+        <Container>
+          <Prose>
+            <h2>{page.title.rendered}</h2>
+            <div dangerouslySetInnerHTML={{ __html: page.content.rendered }} />
+          </Prose>
+          <Prose>
+            <h2>{page.title.rendered}</h2>
+            <div dangerouslySetInnerHTML={{ __html: page.content.rendered }} />
+          </Prose>
+          <Prose>
+            <h2>{page.title.rendered}</h2>
+            <div dangerouslySetInnerHTML={{ __html: page.content.rendered }} />
+          </Prose>
+          <Prose>
+            <h2>{page.title.rendered}</h2>
+            <div dangerouslySetInnerHTML={{ __html: page.content.rendered }} />
+          </Prose>
+          <Prose>
+            <h2>{page.title.rendered}</h2>
+            <div dangerouslySetInnerHTML={{ __html: page.content.rendered }} />
+          </Prose>
+          <Prose>
+            <h2>{page.title.rendered}</h2>
+            <div dangerouslySetInnerHTML={{ __html: page.content.rendered }} />
+          </Prose>
+          <Prose>
+            <h2>{page.title.rendered}</h2>
+            <div dangerouslySetInnerHTML={{ __html: page.content.rendered }} />
+          </Prose>
+          <Prose>
+            <h2>{page.title.rendered}</h2>
+            <div dangerouslySetInnerHTML={{ __html: page.content.rendered }} />
+          </Prose>
+        </Container>
+      </Section>
+    </div>
+  );
 }

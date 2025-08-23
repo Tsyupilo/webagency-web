@@ -30,14 +30,23 @@ export const NavbarContainer = () => {
       animate={
         isScrolled
           ? {
-              width: "1440px",
+              translateY: "1rem",
+              maxWidth: "1520px",
+              backdropFilter: "blur(10px)",
+              background: "hsl(var(--card) / 0.4);",
+              border: "1px solid rgba(255, 255, 255, 0.2)",
             }
-          : { width: "100%" }
+          : {
+              maxWidth: "2560px",
+              backdropFilter: "blur(0px)",
+              background: "transparent",
+              border: "none",
+            }
       }
-      transition={{ duration: 1 }}
+      transition={{ duration: 0.5, type: "spring", stiffness: 40 }}
       id="nav-container"
       className={cn(
-        "left-0 top-0 mx-auto flex w-full items-center justify-between px-4",
+        "left-0 top-0 mx-auto flex w-full items-center justify-between rounded-full px-4",
       )}
     >
       <div id="desktop" className="hidden w-full md:block">

@@ -20,22 +20,11 @@ export function Navbar({ className }: { className?: string }) {
   const [active, setActive] = useState<string | null>(null);
 
   return (
-    <div
-      className={cn(
-        "mx-auto w-full rounded-full border border-white/20 bg-card/40 backdrop-blur-xl",
-        className,
-      )}
-    >
+    <div className={cn("mx-auto w-full", className)}>
       <Menu setActive={setActive}>
-        <Link href="/">
+        <Link href="/" className="invert dark:invert-0">
           <h3 className="sr-only">{siteConfig.site_name}</h3>
-          <Image
-            src={Logo}
-            alt="Logo"
-            width={203}
-            height={33}
-            className="invert dark:invert-0"
-          ></Image>
+          <Image src={Logo} alt="Logo" width={203} height={33} />
         </Link>
         <div className="flex items-center">
           <MenuItem setActive={setActive} active={active} item="Услуги">
@@ -45,7 +34,7 @@ export function Navbar({ className }: { className?: string }) {
             </div>
           </MenuItem>
           <MenuItem setActive={setActive} active={active} item="О нас">
-            <div className="grid grid-cols-2 gap-10 p-4 text-sm">
+            <div className="grid w-full grid-cols-2 gap-10 p-4 text-sm">
               <ProductItem
                 title="Algochurn"
                 href="https://algochurn.com"

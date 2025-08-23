@@ -110,12 +110,12 @@ export default function ThemeButton({
           "relative",
           "flex items-center gap-2 px-5 py-3",
           "rounded-full",
-          "bg-primary hover:bg-primary-light",
+          "bg-primary-light hover:bg-primary-light",
           "font-heading text-lg uppercase leading-none text-black",
           "transition-all duration-700",
           `shadow-0 hover:shadow-button-default`,
           showParticles &&
-            `shadow-button-triggered hover:shadow-button-triggered !bg-primary-lighter`,
+            `!bg-primary-lighter shadow-button-triggered hover:shadow-button-triggered`,
           className,
         )}
       >

@@ -74,7 +74,7 @@ export default function RootLayout({
 
 const Nav = ({ className, children, id }: NavProps) => {
   return (
-    <nav id={id} className="sticky top-2 mt-4">
+    <nav id={id} className="sticky top-0 z-50">
       <NavbarContainer />
     </nav>
   );
