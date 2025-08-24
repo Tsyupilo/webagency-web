@@ -74,7 +74,7 @@ export default function RootLayout({
 
 const Nav = ({ className, children, id }: NavProps) => {
   return (
-    <nav id={id} className="sticky top-0 z-50">
+    <nav id={id} className="sticky top-0 z-50 flex justify-center px-4 pb-4">
       <NavbarContainer />
     </nav>
   );
@@ -94,7 +94,7 @@ const Footer = () => {
                 width={150}
                 height={25}
                 className="invert dark:invert-0"
-              ></Image>
+              />
             </Link>
             <p>
               <Balancer>

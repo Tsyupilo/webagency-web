@@ -22,9 +22,15 @@ export function Navbar({ className }: { className?: string }) {
   return (
     <div className={cn("mx-auto w-full", className)}>
       <Menu setActive={setActive}>
-        <Link href="/" className="invert dark:invert-0">
+        <Link href="/">
           <h3 className="sr-only">{siteConfig.site_name}</h3>
-          <Image src={Logo} alt="Logo" width={203} height={33} />
+          <Image
+            src={Logo}
+            alt="Logo"
+            width={203}
+            height={33}
+            className="invert dark:invert-0"
+          ></Image>
         </Link>
         <div className="flex items-center">
           <MenuItem setActive={setActive} active={active} item="Услуги">
@@ -34,7 +40,7 @@ export function Navbar({ className }: { className?: string }) {
             </div>
           </MenuItem>
           <MenuItem setActive={setActive} active={active} item="О нас">
-            <div className="grid w-full grid-cols-2 gap-10 p-4 text-sm">
+            <div className="grid grid-cols-2 gap-10 p-4 text-sm">
               <ProductItem
                 title="Algochurn"
                 href="https://algochurn.com"
