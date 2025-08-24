@@ -40,12 +40,10 @@ function SuccessParticles({
       {[...Array(14)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute z-20 h-1 w-1 rounded-full bg-black dark:bg-white"
+          className="absolute -z-20 h-2 w-2 rounded-full bg-primary-lighter shadow-2xl shadow-white/20"
           style={{
             left: "50%",
             top: "0",
-            width: Math.random() * 2 + 6,
-            height: Math.random() * 2 + 6,
           }}
           initial={{
             scale: 0,

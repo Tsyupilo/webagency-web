@@ -10,6 +10,7 @@ import {
   HoveredLink,
   Menu,
   MenuItem,
+  MenuItemExpand,
   MenuLink,
   ProductItem,
 } from "./navbar-menu";
@@ -33,12 +34,29 @@ export function Navbar({ className }: { className?: string }) {
           ></Image>
         </Link>
         <div className="flex items-center">
-          <MenuItem setActive={setActive} active={active} item="Услуги">
-            <div className="flex flex-col space-y-4 text-sm">
-              <HoveredLink href="/web-dev">Web Development</HoveredLink>
-              <HoveredLink href="/seo">Search Engine Optimization</HoveredLink>
+          <MenuItemExpand setActive={setActive} active={active} item="Услуги">
+            <div className="grid grid-cols-10 gap-10 p-4 text-sm">
+              {Array.from({ length: 10 }).map((_, index) => (
+                <div key={index} className="flex flex-col gap-4">
+                  <h3>Column {index + 1}</h3>
+                  <ul>
+                    <li>
+                      <Link href="/">Link</Link>
+                    </li>
+                    <li>
+                      <Link href="/">Link</Link>
+                    </li>
+                    <li>
+                      <Link href="/">Link</Link>
+                    </li>
+                    <li>
+                      <Link href="/">Link</Link>
+                    </li>
+                  </ul>
+                </div>
+              ))}
             </div>
-          </MenuItem>
+          </MenuItemExpand>
           <MenuItem setActive={setActive} active={active} item="О нас">
             <div className="grid grid-cols-2 gap-10 p-4 text-sm">
               <ProductItem
@@ -77,9 +95,11 @@ export function Navbar({ className }: { className?: string }) {
             Контакты
           </MenuLink>
         </div>
-        <ThemeButton>
-          Написать нам <MessageCircle className="h-4.5 w-4.5" />
-        </ThemeButton>
+        <div className="hidden lg:block">
+          <ThemeButton>
+            Написать нам <MessageCircle className="h-4.5 w-4.5" />
+          </ThemeButton>
+        </div>
       </Menu>
     </div>
   );

@@ -32,7 +32,7 @@ export const MenuItem = ({
         className="flex cursor-default items-center gap-1 px-4 py-1.5 text-black transition duration-300 group-hover:text-primary group-hover:opacity-[0.9] dark:text-white dark:group-hover:text-primary"
       >
         {item}
-        <ChevronDown className="h-5 w-5 transition-all duration-500 group-hover:rotate-90" />
+        <ChevronDown className="h-5 w-5 transition-all duration-300 group-hover:rotate-180" />
       </motion.p>
       <AnimatePresence>
         {active !== null && (
@@ -89,20 +89,57 @@ export const MenuLink = ({
   );
 };
 
-export const Menu = ({
+export const MenuItemExpand = ({
   setActive,
+  active,
+  item,
   children,
 }: {
   setActive: (item: string | null) => void;
-  children: React.ReactNode;
+  active: string | null;
+  item: string;
+  children?: React.ReactNode;
 }) => {
   return (
-    <nav
-      onMouseLeave={() => setActive(null)} // resets the state
-      className="relative flex items-center justify-between gap-4 px-6 py-4"
-    >
-      {children}
-    </nav>
+    <div onMouseLeave={() => setActive(null)} className="group">
+      <motion.p
+        onMouseEnter={() => setActive(item)}
+        transition={{ duration: 0.3 }}
+        className="flex cursor-default items-center gap-1 px-4 py-1.5 text-black transition duration-300 group-hover:text-primary group-hover:opacity-[0.9] dark:text-white dark:group-hover:text-primary"
+      >
+        {item}
+        <ChevronDown className="h-5 w-5 transition-all duration-300 group-hover:rotate-180" />
+      </motion.p>
+      <AnimatePresence>
+        {active !== null && (
+          <motion.div
+            key="menuitem-dropdown"
+            initial={{ opacity: 0, scale: 0.85, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.85, y: 10 }}
+            transition={transition}
+            className="absolute left-0 w-full pt-2"
+          >
+            {active === item && (
+              <div className="w-full pt-2">
+                <motion.div
+                  transition={transition}
+                  layoutId="active" // layoutId ensures smooth animation
+                  className="overflow-hidden rounded-2xl border border-black/[0.2] bg-white shadow-xl backdrop-blur dark:border-white/[0.2] dark:bg-card"
+                >
+                  <motion.div
+                    layout // layout ensures smooth animation
+                    className="h-full w-max p-4"
+                  >
+                    {children}
+                  </motion.div>
+                </motion.div>
+              </div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };
 
@@ -146,5 +183,22 @@ export const HoveredLink = ({ children, ...rest }: any) => {
     >
       {children}
     </a>
+  );
+};
+
+export const Menu = ({
+  setActive,
+  children,
+}: {
+  setActive: (item: string | null) => void;
+  children: React.ReactNode;
+}) => {
+  return (
+    <nav
+      onMouseLeave={() => setActive(null)} // resets the state
+      className="relative flex items-center justify-between gap-4 px-6 py-4"
+    >
+      {children}
+    </nav>
   );
 };
