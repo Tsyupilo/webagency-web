@@ -36,31 +36,30 @@ export const NavbarContainer = () => {
     },
   };
 
+  const handleScroll = (currentPosition: number) => {
+    if (previousPosition > currentPosition) {
+      setHideNav(false); // scrolling up, show nav
+    } else if (
+      currentPosition > previousPosition &&
+      currentPosition > HIDE_NAV_POSITION
+    ) {
+      setHideNav(true); // scrolling down and past 200px, hide nav
+    }
+
+    setPreviousPosition(currentPosition);
+  };
+
   useEffect(() => {
-    const currentPosition = document.documentElement.scrollTop;
-    const handleScroll = () => {
-      if (previousPosition > currentPosition) {
-        setHideNav(false); // scrolling up, show nav
-      } else if (
-        currentPosition > previousPosition &&
-        currentPosition > HIDE_NAV_POSITION
-      ) {
-        setHideNav(true); // scrolling down and past 200px, hide nav
-      }
-
-      setPreviousPosition(currentPosition);
-    };
-
     if (window.scrollY > 0) {
       setIsScrolled(true);
     } else {
       setIsScrolled(false);
     }
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", () => handleScroll(window.scrollY));
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", () => handleScroll(window.scrollY));
     };
   }, [hideNav, isScrolled, previousPosition]);
 

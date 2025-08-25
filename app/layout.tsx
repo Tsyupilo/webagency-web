@@ -32,9 +32,8 @@ const fontHeading = FontHeading({
 });
 
 export const metadata: Metadata = {
-  title: "WordPress & Next.js Starter by 9d8",
-  description:
-    "A starter template for Next.js with WordPress as a headless CMS.",
+  title: siteConfig.site_name,
+  description: siteConfig.site_description[siteConfig.site_lang],
   metadataBase: new URL(siteConfig.site_domain),
   alternates: {
     canonical: "/",
@@ -47,7 +46,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ru" suppressHydrationWarning>
+    <html lang={siteConfig.site_lang} suppressHydrationWarning>
       <head />
       <body
         className={cn(

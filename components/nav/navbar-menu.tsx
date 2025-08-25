@@ -1,4 +1,5 @@
 "use client";
+import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
 import { AnimatePresence, motion, Transition } from "motion/react";
 import Link from "next/link";
@@ -29,7 +30,7 @@ export const MenuItem = ({
       <motion.p
         onMouseEnter={() => setActive(item)}
         transition={{ duration: 0.3 }}
-        className="flex cursor-default items-center gap-1 px-4 py-1.5 text-black transition duration-300 group-hover:text-primary group-hover:opacity-[0.9] dark:text-white dark:group-hover:text-primary"
+        className="flex cursor-default items-center gap-1 px-4 py-1.5 text-lg font-bold text-foreground transition duration-300 group-hover:text-primary group-hover:opacity-[0.9] dark:group-hover:text-primary"
       >
         {item}
         <ChevronDown className="h-5 w-5 transition-all duration-300 group-hover:rotate-180" />
@@ -81,7 +82,7 @@ export const MenuLink = ({
     <div onMouseEnter={() => setActive(null)} className="relative">
       <Link
         href={href}
-        className="block px-4 py-1.5 text-neutral-700 transition duration-300 hover:text-primary dark:text-white dark:hover:text-primary"
+        className="block px-4 py-1.5 text-lg font-bold text-foreground transition duration-300 hover:text-primary dark:hover:text-primary"
       >
         {children}
       </Link>
@@ -101,11 +102,14 @@ export const MenuItemExpand = ({
   children?: React.ReactNode;
 }) => {
   return (
-    <div onMouseLeave={() => setActive(null)} className="group">
+    <div
+      onMouseLeave={() => setActive(null)}
+      className="group static 2xl:relative"
+    >
       <motion.p
         onMouseEnter={() => setActive(item)}
         transition={{ duration: 0.3 }}
-        className="flex cursor-default items-center gap-1 px-4 py-1.5 text-black transition duration-300 group-hover:text-primary group-hover:opacity-[0.9] dark:text-white dark:group-hover:text-primary"
+        className="flex cursor-default items-center gap-1 px-4 py-1.5 text-lg font-bold text-foreground transition duration-300 group-hover:text-primary group-hover:opacity-[0.9] dark:group-hover:text-primary"
       >
         {item}
         <ChevronDown className="h-5 w-5 transition-all duration-300 group-hover:rotate-180" />
@@ -118,18 +122,18 @@ export const MenuItemExpand = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.85, y: 10 }}
             transition={transition}
-            className="absolute left-0 w-full pt-2"
+            className="absolute left-0 w-full"
           >
             {active === item && (
-              <div className="w-full pt-2">
+              <div className="static left-0 w-full pt-2 2xl:w-max">
                 <motion.div
                   transition={transition}
                   layoutId="active" // layoutId ensures smooth animation
-                  className="overflow-hidden rounded-2xl border border-black/[0.2] bg-white shadow-xl backdrop-blur dark:border-white/[0.2] dark:bg-card"
+                  className="overflow-hidden rounded-2xl border border-black/[0.2] bg-white/40 shadow-xl backdrop-blur dark:border-white/[0.2] dark:bg-card"
                 >
                   <motion.div
                     layout // layout ensures smooth animation
-                    className="h-full w-max p-4"
+                    className="h-full w-full p-4 2xl:w-max"
                   >
                     {children}
                   </motion.div>
@@ -172,6 +176,50 @@ export const ProductItem = ({
         </p>
       </div>
     </a>
+  );
+};
+
+export const CategoryItem = ({
+  tag,
+  title,
+  setActive,
+  active,
+  src,
+}: {
+  tag: string;
+  title: string;
+  setActive: (item: string | null) => void;
+  active: string | null;
+  src: string;
+}) => {
+  return (
+    <button
+      onClick={() => setActive(tag)}
+      className={cn(
+        "flex items-center gap-2 rounded-lg border border-white/0 p-4",
+        active === tag
+          ? "border-white/20 bg-background"
+          : "hover:bg-background/20",
+      )}
+    >
+      <img
+        src={src}
+        width={60}
+        height={60}
+        alt={title}
+        className="h-full rounded-md shadow-2xl"
+      />
+      <div>
+        <h4
+          className={cn(
+            "text-balance text-left text-lg font-bold leading-tight",
+            active === tag ? "text-foreground" : "text-muted-foreground",
+          )}
+        >
+          {title}
+        </h4>
+      </div>
+    </button>
   );
 };
 
