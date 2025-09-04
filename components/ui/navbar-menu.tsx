@@ -7,9 +7,9 @@ import React from "react";
 
 const transition: Transition = {
   type: "spring",
-  mass: 0.5,
-  damping: 11.5,
-  stiffness: 100,
+  mass: 0.4,
+  damping: 15.5,
+  stiffness: 120,
   restDelta: 0.001,
   restSpeed: 0.001,
 };
@@ -28,12 +28,18 @@ export const MenuItem = ({
   return (
     <div onMouseLeave={() => setActive(null)} className="group relative">
       <motion.p
+        onClick={() => setActive(active === item ? null : item)}
         onMouseEnter={() => setActive(item)}
         transition={{ duration: 0.3 }}
         className="flex cursor-default items-center gap-1 px-4 py-1.5 text-lg font-bold text-foreground transition duration-300 group-hover:text-primary group-hover:opacity-[0.9] dark:group-hover:text-primary"
       >
         {item}
-        <ChevronDown className="h-5 w-5 transition-all duration-300 group-hover:rotate-180" />
+        <ChevronDown
+          className={cn(
+            "h-5 w-5 transition-all duration-300",
+            active === item ? "rotate-180" : "",
+          )}
+        />
       </motion.p>
       <AnimatePresence>
         {active !== null && (
@@ -49,7 +55,7 @@ export const MenuItem = ({
                 <motion.div
                   transition={transition}
                   layoutId="active" // layoutId ensures smooth animation
-                  className="overflow-hidden rounded-2xl border border-black/[0.2] bg-white shadow-xl backdrop-blur dark:border-white/[0.2] dark:bg-card"
+                  className="overflow-hidden rounded-2xl border border-white/20 bg-card shadow-xl backdrop-blur"
                 >
                   <motion.div
                     layout // layout ensures smooth animation
@@ -92,13 +98,19 @@ export const MenuLink = ({
 
 export const MenuItemExpand = ({
   setActive,
+  setHasHovered,
   active,
   item,
+  hasHovered,
+  services,
   children,
 }: {
   setActive: (item: string | null) => void;
+  setHasHovered: (hasHovered: boolean) => void;
   active: string | null;
   item: string;
+  hasHovered: boolean;
+  services: boolean;
   children?: React.ReactNode;
 }) => {
   return (
@@ -107,12 +119,32 @@ export const MenuItemExpand = ({
       className="group static 2xl:relative"
     >
       <motion.p
-        onMouseEnter={() => setActive(item)}
+        onClick={() => setActive(active === item ? null : item)}
+        onMouseEnter={() => {
+          setActive(item);
+          if (services) {
+            const timer = setTimeout(() => {
+              setHasHovered(true);
+            }, 300);
+
+            Promise.resolve(timer).then(() => {
+              setHasHovered(false);
+            });
+
+            return () => clearTimeout(timer);
+          }
+          setHasHovered(true);
+        }}
         transition={{ duration: 0.3 }}
         className="flex cursor-default items-center gap-1 px-4 py-1.5 text-lg font-bold text-foreground transition duration-300 group-hover:text-primary group-hover:opacity-[0.9] dark:group-hover:text-primary"
       >
         {item}
-        <ChevronDown className="h-5 w-5 transition-all duration-300 group-hover:rotate-180" />
+        <ChevronDown
+          className={cn(
+            "h-5 w-5 transition-all duration-300",
+            active === item ? "rotate-180" : "",
+          )}
+        />
       </motion.p>
       <AnimatePresence>
         {active !== null && (
@@ -129,7 +161,7 @@ export const MenuItemExpand = ({
                 <motion.div
                   transition={transition}
                   layoutId="active" // layoutId ensures smooth animation
-                  className="overflow-hidden rounded-2xl border border-black/[0.2] bg-white/40 shadow-xl backdrop-blur dark:border-white/[0.2] dark:bg-card"
+                  className="overflow-hidden rounded-2xl border border-white/20 bg-card shadow-xl"
                 >
                   <motion.div
                     layout // layout ensures smooth animation
@@ -198,8 +230,8 @@ export const CategoryItem = ({
       className={cn(
         "flex items-center gap-2 rounded-lg border border-white/0 p-4",
         active === tag
-          ? "border-white/20 bg-background"
-          : "hover:bg-background/20",
+          ? "border-white/20 bg-card-dark"
+          : "hover:bg-card-dark/20",
       )}
     >
       <img

@@ -1,5 +1,6 @@
-import { Container, Prose, Section } from "@/components/craft";
-import HeroFront from "@/components/sections/hero-front";
+import HeroFront, {
+  HeroFrontProps,
+} from "@/components/blocks/sections/hero-front";
 import { siteConfig } from "@/configs/site.config";
 import { getAllPages, getPageBySlug } from "@/lib/wordpress";
 
@@ -77,45 +78,11 @@ export default async function Page() {
 
   const page = await getPageBySlug(slug);
 
+  console.log(page.acf.hero_banner);
+
   return (
     <div className="flex flex-col">
-      <HeroFront />
-      <Section>
-        <Container>
-          <Prose>
-            <h2>{page.title.rendered}</h2>
-            <div dangerouslySetInnerHTML={{ __html: page.content.rendered }} />
-          </Prose>
-          <Prose>
-            <h2>{page.title.rendered}</h2>
-            <div dangerouslySetInnerHTML={{ __html: page.content.rendered }} />
-          </Prose>
-          <Prose>
-            <h2>{page.title.rendered}</h2>
-            <div dangerouslySetInnerHTML={{ __html: page.content.rendered }} />
-          </Prose>
-          <Prose>
-            <h2>{page.title.rendered}</h2>
-            <div dangerouslySetInnerHTML={{ __html: page.content.rendered }} />
-          </Prose>
-          <Prose>
-            <h2>{page.title.rendered}</h2>
-            <div dangerouslySetInnerHTML={{ __html: page.content.rendered }} />
-          </Prose>
-          <Prose>
-            <h2>{page.title.rendered}</h2>
-            <div dangerouslySetInnerHTML={{ __html: page.content.rendered }} />
-          </Prose>
-          <Prose>
-            <h2>{page.title.rendered}</h2>
-            <div dangerouslySetInnerHTML={{ __html: page.content.rendered }} />
-          </Prose>
-          <Prose>
-            <h2>{page.title.rendered}</h2>
-            <div dangerouslySetInnerHTML={{ __html: page.content.rendered }} />
-          </Prose>
-        </Container>
-      </Section>
+      <HeroFront fields={page.acf.hero_banner as HeroFrontProps} />
     </div>
   );
 }

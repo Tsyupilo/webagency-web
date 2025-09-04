@@ -1,11 +1,11 @@
 "use client";
 
-import { Navbar } from "./navbar";
-import { MobileNav } from "./mobile-nav";
-import { useState, useEffect } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useEffect, useState } from "react";
+import { MobileNav } from "./mobile-nav";
+import { Navbar } from "./navbar";
 
 export const NavbarContainer = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -30,9 +30,9 @@ export const NavbarContainer = () => {
     hidden: {
       translateY: "-5rem",
       maxWidth: "1520px",
-      backdropFilter: "blur(10px)",
-      background: "hsl(var(--card) / 0.4)",
-      border: "1px solid rgba(255, 255, 255, 0.2)",
+      backdropFilter: "blur(0px)",
+      background: "hsl(var(--card) / 0)",
+      border: "1px solid rgba(255, 255, 255, 0)",
     },
   };
 
@@ -67,7 +67,7 @@ export const NavbarContainer = () => {
 
   return (
     <motion.div
-      initial={NAV_INITIAL_STATES.default}
+      initial={NAV_INITIAL_STATES.hidden}
       animate={
         hideNav
           ? NAV_INITIAL_STATES.hidden

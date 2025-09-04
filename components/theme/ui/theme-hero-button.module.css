@@ -1,0 +1,100 @@
+:root {
+  --hero-button-background:
+    linear-gradient(
+      calc(178.3deg + 10deg * 3),
+      #76adff00 30.26%,
+      #32f3994d 98.56%
+    ),
+    linear-gradient(0deg, #fff6, #fff6),
+    linear-gradient(0deg, #aab9ee80, #aab9ee80),
+    conic-gradient(
+      from 180deg at 50% 50%,
+      #fff -4.92deg,
+      #000 50.9deg,
+      #000 58.12deg,
+      #fff 87.99deg,
+      #000 138.47deg,
+      #fff 196.68deg,
+      #000 243.23deg,
+      #fff 288.52deg,
+      #000 334.6deg,
+      #fff 355.08deg,
+      #000 410.9deg
+    ),
+    conic-gradient(
+      from calc(180deg - 10deg / 4) at 50% 50%,
+      #fff -4.92deg,
+      #000 48.91deg,
+      #000 50.9deg,
+      #fff 87.99deg,
+      #000 138.47deg,
+      #fff 196.68deg,
+      #000 243.23deg,
+      #fff 288.52deg,
+      #000 334.6deg,
+      #fff 355.08deg,
+      #000 408.91deg
+    ),
+    radial-gradient(
+      111.84% 111.84% at 2.63% -11.84%,
+      #deff7c 19.99%,
+      #feb0fe 37.34%,
+      #8571ff 58.49%,
+      #4eebc6 80.11%,
+      #5cb1ff 91.82%
+    );
+}
+
+.buttonGradient {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% + 1rem));
+  width: calc(100% - 1rem);
+  height: calc(100% - 1rem);
+  border-radius: 2rem;
+  z-index: -1;
+  background: var(--hero-button-background);
+  background-blend-mode: normal, normal, normal, screen, difference, normal;
+  filter: blur(12px) brightness(0.8);
+  opacity: 0.5;
+}
+
+.buttonBackground {
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: var(--hero-button-background);
+    background-blend-mode: normal, normal, normal, screen, difference, normal;
+    animation: background 10s linear infinite;
+  }
+}
+
+@keyframes background {
+  from {
+    transform: rotate(0deg) scale(10);
+  }
+  to {
+    transform: rotate(360deg) scale(10);
+  }
+}
+
+@keyframes backgroundWrapper {
+  0%,
+  100% {
+    opacity: 0;
+    filter: blur(24px);
+  }
+  50% {
+    opacity: 0.5;
+    filter: blur(36px);
+  }
+}

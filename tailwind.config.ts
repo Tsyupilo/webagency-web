@@ -26,6 +26,14 @@ const config = {
         sans: ["var(--font-sans)", ...fontFamily.sans],
         heading: ["var(--font-heading)", ...fontFamily.sans],
       },
+      padding: {
+        "front-hero": "14.625rem",
+        front: "10rem",
+        inner: "7.5rem",
+      },
+      fontSize: {
+        "6xl": "4rem",
+      },
       width: {
         "4.5": "1.125rem",
         "5.5": "1.375rem",
@@ -71,6 +79,8 @@ const config = {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+          dark: "hsl(var(--card-dark))",
+          light: "hsl(var(--card-light))",
         },
       },
       boxShadow: {
@@ -91,10 +101,19 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        shine: {
+          from: {
+            backgroundPosition: "100%",
+          },
+          to: {
+            backgroundPosition: "-100%",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        shine: "shine 2s linear infinite",
       },
     },
   },
