@@ -12,9 +12,10 @@ export const HeroHighlight = () => {
         position: "absolute",
         top: "50%",
         left: "50%",
+        marginTop: "-0.25rem",
         transform: "translate(-50%, -50%)",
-        width: "calc(100% + 1rem)",
-        height: "calc(100% + 1rem)",
+        width: "calc(100% + 1.825rem)",
+        height: "calc(100% + 1.825rem)",
       }}
     >
       <motion.path

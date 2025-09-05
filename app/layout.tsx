@@ -41,8 +41,7 @@ export default function RootLayout({
       <head />
       <body
         className={cn(
-          "grid grid-rows-[auto_1fr_auto]",
-          "min-h-screen",
+          "relative w-full",
           "font-sans antialiased",
           font.variable,
           fontHeading.variable,
@@ -54,9 +53,15 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Nav />
-          {children}
-          <Footer />
+          <div className="max-w-screen-limit mx-auto flex min-h-screen flex-col">
+            <header className="fixed left-0 top-0 z-50 w-full">
+              <Nav />
+            </header>
+            <main className="flex-grow">{children}</main>
+            <footer className="mt-auto shrink-0">
+              <Footer />
+            </footer>
+          </div>
         </ThemeProvider>
         <Analytics />
       </body>
@@ -66,10 +71,7 @@ export default function RootLayout({
 
 const Nav = ({ className, children, id }: NavProps) => {
   return (
-    <nav
-      id={id}
-      className="fixed top-0 z-50 flex w-full justify-center px-4 pb-4"
-    >
+    <nav id={id} className="container mx-auto flex w-full justify-center pb-4">
       <NavbarContainer />
     </nav>
   );

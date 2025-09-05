@@ -1,6 +1,6 @@
 import HeroFront, {
   HeroFrontProps,
-} from "@/components/blocks/sections/hero-front";
+} from "@/components/blocks/sections/front/hero-front";
 import { siteConfig } from "@/configs/site.config";
 import { getAllPages, getPageBySlug } from "@/lib/wordpress";
 

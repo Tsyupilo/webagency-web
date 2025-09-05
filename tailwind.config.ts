@@ -27,12 +27,22 @@ const config = {
         heading: ["var(--font-heading)", ...fontFamily.sans],
       },
       padding: {
-        "front-hero": "14.625rem",
         front: "10rem",
         inner: "7.5rem",
+        "header-xl": "4.5rem",
+        "header-lg": "4.5rem",
+        "header-md": "4rem",
+        "header-sm": "3.5rem",
       },
+      margin: {},
       fontSize: {
         "6xl": "4rem",
+      },
+      maxWidth: {
+        "screen-limit": "199rem",
+      },
+      maxHeight: {
+        "screen-x2": "200vh",
       },
       width: {
         "4.5": "1.125rem",

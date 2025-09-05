@@ -5,6 +5,12 @@ import {
   TelegramIcon,
   WhatsAppIcon,
 } from "@/components/assets/icons/socials/telegram";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { siteConfig } from "@/configs/site.config";
 import { cn } from "@/lib/utils";
 import { Book, Building2, MessageCircle, Phone, User } from "lucide-react";
@@ -226,9 +232,21 @@ const NAVBAR_LIST = {
     { href: "/contacts", text: "Контакты" },
   ],
   socials: [
-    { href: "https://t.me/wwwizards", icon: TelegramIcon },
-    { href: "https://wa.me/79819063818", icon: WhatsAppIcon },
-    { href: "mailto:info@wwwizards.ru", icon: EmailIcon },
+    {
+      href: "https://t.me/wwwizards",
+      icon: TelegramIcon,
+      name: "Чат в Telegram",
+    },
+    {
+      href: "https://wa.me/79819063818",
+      icon: WhatsAppIcon,
+      name: "Чат в WhatsApp",
+    },
+    {
+      href: "mailto:info@wwwizards.ru",
+      icon: EmailIcon,
+      name: "Написать письмо",
+    },
   ],
 };
 
@@ -409,16 +427,46 @@ export function Navbar({ className }: { className?: string }) {
           ))}
         </div>
         <div className="hidden w-48 items-center justify-end gap-2.5 lg:flex">
-          {NAVBAR_LIST.socials.map((social, index) => {
-            const IconComponent = social.icon;
-            return (
-              <Link key={index} href={social.href}>
-                <IconComponent className="size-10" bgColor="#ffffff00" />
-              </Link>
-            );
-          })}
+          <TooltipProvider openDelay={0}>
+            {NAVBAR_LIST.socials.map((social, index) => (
+              <SocialIcon key={index} social={social} />
+            ))}
+          </TooltipProvider>
         </div>
       </Menu>
     </div>
+  );
+}
+
+function SocialIcon({
+  social,
+}: {
+  social: (typeof NAVBAR_LIST.socials)[number];
+}) {
+  const [isHovered, setIsHovered] = useState(false);
+  const IconComponent = social.icon;
+
+  const handleHover = () => {
+    setIsHovered(!isHovered);
+  };
+  return (
+    <Tooltip side="bottom" sideOffset={2}>
+      <TooltipTrigger>
+        <Link
+          href={social.href}
+          onMouseEnter={handleHover}
+          onMouseLeave={handleHover}
+        >
+          <IconComponent
+            className="size-10"
+            bgColor="#ffffff00"
+            color={isHovered ? "hsl(var(--primary))" : "#ffffff"}
+          />
+        </Link>
+      </TooltipTrigger>
+      <TooltipContent>
+        <strong className="whitespace-nowrap">{social.name}</strong>
+      </TooltipContent>
+    </Tooltip>
   );
 }

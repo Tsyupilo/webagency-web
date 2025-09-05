@@ -6,8 +6,8 @@ import Link from "next/link";
 
 export const Footer = () => {
   return (
-    <footer>
-      <div className="container mx-auto grid gap-12 md:grid-cols-[1.5fr_0.5fr_0.5fr]">
+    <section className="container mx-auto flex w-full flex-col gap-4 py-12">
+      <div className="flex w-full justify-between">
         <div className="not-prose flex flex-col gap-6">
           <Link href="/">
             <h3 className="sr-only">{siteConfig.site_name}</h3>
@@ -44,10 +44,10 @@ export const Footer = () => {
           ))}
         </div>
       </div>
-      <div className="not-prose container mx-auto mt-4 flex flex-col justify-between gap-6 border-t pt-4 md:mt-8 md:flex-row md:items-center md:gap-2 md:pt-8">
+      <div className="not-prose mt-4 flex flex-col justify-between gap-6 border-t pt-4 md:mt-8 md:flex-row md:items-center md:gap-2 md:pt-8">
         <ThemeToggle />
         <p className="text-muted-foreground">&copy; {siteConfig.site_name}</p>
       </div>
-    </footer>
+    </section>
   );
 };

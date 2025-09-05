@@ -14,22 +14,22 @@ export const NavbarContainer = () => {
   const HIDE_NAV_POSITION = 500;
   const NAV_INITIAL_STATES = {
     default: {
-      maxWidth: "2560px",
       translateY: "0rem",
       backdropFilter: "blur(0px)",
+      padding: "1rem 0rem",
       background: "hsl(var(--card) / 0)",
       border: "1px solid rgba(255, 255, 255, 0)",
     },
     scrolled: {
       translateY: "1rem",
-      maxWidth: "1520px",
+      padding: "1rem 1.5rem",
       backdropFilter: "blur(10px)",
       background: "hsl(var(--card) / 0.4)",
       border: "1px solid rgba(255, 255, 255, 0.2)",
     },
     hidden: {
       translateY: "-5rem",
-      maxWidth: "1520px",
+      padding: "1rem 1.5rem",
       backdropFilter: "blur(0px)",
       background: "hsl(var(--card) / 0)",
       border: "1px solid rgba(255, 255, 255, 0)",
@@ -75,11 +75,9 @@ export const NavbarContainer = () => {
             ? NAV_INITIAL_STATES.scrolled
             : NAV_INITIAL_STATES.default
       }
-      transition={{ duration: 0.8, type: "tween", stiffness: 100 }}
+      transition={{ duration: 0.5, mass: 0.2, type: "spring", stiffness: 100 }}
       id="nav-container"
-      className={cn(
-        "mx-auto flex w-full items-center justify-between rounded-full",
-      )}
+      className={cn("flex w-full items-center justify-between rounded-full")}
     >
       {isMobile ? (
         <div id="mobile" className="w-full">

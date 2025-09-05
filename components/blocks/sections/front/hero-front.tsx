@@ -25,12 +25,17 @@ export default function HeroFront({ fields }: { fields: HeroFrontProps }) {
   if (!fields) return null;
 
   return (
-    <section data-slot="hero" className="relative pb-front pt-front-hero">
+    <section data-slot="hero" className="pt-header-xl relative">
       <div data-slot="background">
         <motion.div
           className="absolute left-0 top-0 -z-20 h-full w-full gradient-mask-b-0"
-          initial={{ opacity: 0, filter: "blur(8px)" }}
-          animate={{ opacity: 1, filter: "blur(0px)" }}
+          initial={{
+            opacity: 0,
+            filter: "blur(8px)",
+            scale: 0.8,
+            y: -140,
+          }}
+          animate={{ opacity: 1, filter: "blur(0px)", scale: 1, y: 0 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
         >
           <LightRays
@@ -48,7 +53,7 @@ export default function HeroFront({ fields }: { fields: HeroFrontProps }) {
         </motion.div>
       </div>
 
-      <div data-slot="container" className="container mx-auto h-full">
+      <div data-slot="container" className="container mx-auto h-full py-front">
         <div
           data-slot="content"
           className="flex h-full w-full flex-col items-center justify-center gap-6"
@@ -63,8 +68,8 @@ export default function HeroFront({ fields }: { fields: HeroFrontProps }) {
                 data-slot="description"
                 className="flex flex-col text-center text-2xl leading-tight text-accent-foreground"
                 dangerouslySetInnerHTML={{ __html: fields.description }}
-                initial={{ opacity: 0, y: 20, filter: "blur(5px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                initial={{ opacity: 0, y: 20, scale: 0.9, filter: "blur(5px)" }}
+                animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
                 transition={{ duration: 0.8, delay: 1.3, ease: "easeOut" }}
               ></motion.div>
             </div>
@@ -98,8 +103,8 @@ function HeroFrontTitle({ originTitle }: { originTitle: string }) {
       data-slot="title"
       data-title={originTitle}
       className="text-balance text-center font-heading text-6xl leading-none tracking-tight text-foreground"
-      initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
-      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      initial={{ opacity: 0, y: 20, filter: "blur(8px)", scale: 0.8 }}
+      animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
       transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
     >
       <motion.span
@@ -164,29 +169,25 @@ function HeroFrontButton() {
   useEffect(() => {
     setTimeout(() => {
       setStartAnimation(true);
-    }, 1500);
+    }, 1900);
   }, [startAnimation]);
   return (
     <motion.div
       className="flex flex-col items-center gap-2"
-      initial={{ opacity: 0, y: 25, filter: "blur(5px)" }}
-      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      initial={{ opacity: 0, y: 40, filter: "blur(6px)", scale: 0.9 }}
+      animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
       transition={{
-        type: "spring",
-        stiffness: 120,
-        damping: 16,
-        mass: 1.2,
+        duration: 0.7,
+        ease: "easeOut",
         delay: 1.5,
       }}
     >
       <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 10, filter: "blur(2px)" }}
+        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
         transition={{
-          type: "spring",
-          stiffness: 120,
-          damping: 16,
-          mass: 1.2,
+          duration: 0.7,
+          ease: "easeOut",
           delay: 1.7,
         }}
       >
@@ -195,28 +196,30 @@ function HeroFrontButton() {
           <MessageCircleIcon size={20} />
         </ThemeButton>
       </motion.div>
-
+      {/* startAnimation el */}
       <motion.div
         className="inline-flex items-center gap-2 text-center text-sm"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 1.9 }}
+        initial={{ opacity: 0 }}
+        animate={startAnimation && { opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <Gift size={14} className="text-primary" />{" "}
-        {startAnimation && (
-          <SplitText
-            text={BLOCK_DESCRIPTION[siteConfig.site_lang].description}
-            delay={80}
-            duration={0.4}
-            ease="power3.out"
-            splitType="chars"
-            from={{ opacity: 0, y: 40, filter: "blur(4px)" }}
-            to={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            threshold={0.1}
-            rootMargin="-10px"
-            className="overflow-visible font-semibold leading-none text-primary"
-          />
-        )}
+        <SplitText
+          text={BLOCK_DESCRIPTION[siteConfig.site_lang].description}
+          delay={40}
+          duration={0.1}
+          ease="power3.out"
+          splitType="chars"
+          from={{ opacity: 0, y: 40, filter: "blur(4px)" }}
+          to={
+            startAnimation
+              ? { opacity: 1, y: 0, filter: "blur(0px)" }
+              : { opacity: 0, y: 0, filter: "blur(0px)" }
+          }
+          threshold={0.1}
+          rootMargin="-10px"
+          className="overflow-visible font-semibold leading-none text-primary"
+        />
       </motion.div>
     </motion.div>
   );
