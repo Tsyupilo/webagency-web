@@ -68,7 +68,7 @@ const ContactsForm = () => {
                 <FormControl>
                   <InputWrapper>
                     <Ghost />
-                    <Input placeholder="Джон" {...field} />
+                    <Input placeholder="Гендальф Белый" {...field} />
                   </InputWrapper>
                 </FormControl>
                 <FormMessage />
@@ -101,7 +101,7 @@ const ContactsForm = () => {
                   <FormLabel>E-mail</FormLabel>
                   <InputWrapper>
                     <Mail />
-                    <Input placeholder="my.mail@example.ru" {...field} />
+                    <Input placeholder="gandalf@white.ru" {...field} />
                   </InputWrapper>
                   <FormMessage />
                 </FormItem>
@@ -141,7 +141,7 @@ const ContactsForm = () => {
           />
 
           <div className="flex justify-center space-x-4">
-            <ThemeButton type="submit">
+            <ThemeButton variant="outline">
               Отправить <Send size={16} />
             </ThemeButton>
           </div>

@@ -16,7 +16,7 @@ import {
   TelegramIcon,
   WhatsAppIcon,
 } from "@/components/assets/icons/socials/telegram";
-import { Button } from "@/components/ui/button";
+import ThemeButton from "@/components/theme/ui/theme-button";
 import {
   Drawer,
   DrawerContent,
@@ -27,6 +27,8 @@ import {
 } from "@/components/ui/drawer";
 import { AnimateIcon } from "@/components/ui/icons/icon";
 import { MessageCircle } from "@/components/ui/icons/message-circle-icon";
+import { socialLinks } from "@/configs/options.config";
+import { siteConfig } from "@/configs/site.config";
 import { motion } from "motion/react";
 import Link from "next/link";
 
@@ -136,13 +138,13 @@ export default function ContactsDrawer({
             <DrawerHeader className="space-y-2.5 px-0">
               <DrawerTitle>
                 <AnimateIcon animateOnHover={true} animateOnTap={true}>
-                  <div className="flex items-center gap-3 text-2xl font-semibold tracking-tighter">
+                  <div className="flex items-center gap-3 text-2xl font-semibold tracking-tighter text-primary">
                     <motion.div variants={itemVariants as any}>
                       <MessageCircle className="size-8" />
                     </motion.div>
                     <motion.span
                       variants={itemVariants as any}
-                      className="text-4xl font-bold"
+                      className="text-4xl"
                     >
                       Давайте пообщаемся
                     </motion.span>
@@ -150,7 +152,7 @@ export default function ContactsDrawer({
                 </AnimateIcon>
               </DrawerTitle>
               <motion.div variants={itemVariants as any}>
-                <DrawerDescription className="text-base">
+                <DrawerDescription className="text-base text-accent-foreground dark:text-accent-foreground">
                   Просто оставьте заявку через нашу контактную форму,
                   либо&nbsp;начните чат в Telegram или WhatsApp
                 </DrawerDescription>
@@ -161,7 +163,7 @@ export default function ContactsDrawer({
           <motion.div variants={itemVariants as any}>
             <DrawerFooter className="flex flex-col gap-3 px-0">
               <Link
-                href="https://t.me/wwwizards"
+                href={socialLinks.telegram[siteConfig.site_lang]}
                 target="_blank"
                 className="hover:brightness-120 group relative inline-flex h-12 w-full items-center justify-center overflow-hidden rounded-full bg-socials-telegram/100 font-heading text-base leading-none tracking-wide text-accent-foreground transition-all duration-500"
               >
@@ -217,16 +219,17 @@ export default function ContactsDrawer({
                 </motion.div>
               </Link>
               {setDialogState && (
-                <Button
+                <ThemeButton
                   variant="outline"
+                  fillWidth
                   onClick={() => {
                     setDialogState("open");
                     setCurrentState("closed");
                   }}
-                  className="font-regular h-12 w-full rounded-full font-heading text-base uppercase tracking-tighter transition-colors hover:bg-card"
+                  className="inline-flex w-full items-center justify-center text-center text-base uppercase tracking-tighter"
                 >
                   Оставить заявку
-                </Button>
+                </ThemeButton>
               )}
             </DrawerFooter>
           </motion.div>

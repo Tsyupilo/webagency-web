@@ -1,7 +1,6 @@
 "use client";
 import { Logo } from "@/components/assets/icons/logo";
 import {
-  EmailIcon,
   TelegramIcon,
   WhatsAppIcon,
 } from "@/components/assets/icons/socials/telegram";
@@ -11,6 +10,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { botLinks, socialLinks } from "@/configs/options.config";
 import { siteConfig } from "@/configs/site.config";
 import { cn } from "@/lib/utils";
 import { Book, Building2, MessageCircle, Phone, User } from "lucide-react";
@@ -233,19 +233,14 @@ const NAVBAR_LIST = {
   ],
   socials: [
     {
-      href: "https://t.me/wwwizards",
+      href: botLinks.telegram[siteConfig.site_lang],
       icon: TelegramIcon,
       name: "Чат в Telegram",
     },
     {
-      href: "https://wa.me/79819063818",
+      href: socialLinks.whatsapp[siteConfig.site_lang],
       icon: WhatsAppIcon,
       name: "Чат в WhatsApp",
-    },
-    {
-      href: "mailto:info@wwwizards.ru",
-      icon: EmailIcon,
-      name: "Написать письмо",
     },
   ],
 };
@@ -456,12 +451,17 @@ function SocialIcon({
           href={social.href}
           onMouseEnter={handleHover}
           onMouseLeave={handleHover}
-          className="px-1"
+          className="px-1 transition-all duration-500"
+          style={{
+            filter: isHovered
+              ? "drop-shadow(0 0 12px hsla(var(--primary) / 0.5))"
+              : "drop-shadow(0 0 0px hsla(var(--primary) / 0))",
+          }}
         >
           <IconComponent
             className="size-10"
             bgColor="#ffffff00"
-            color={isHovered ? "hsl(var(--primary))" : "#ffffff"}
+            color={isHovered ? "hsl(var(--primary)) " : "#ffffff"}
           />
         </Link>
       </TooltipTrigger>

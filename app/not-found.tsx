@@ -31,7 +31,7 @@ export default function NotFound() {
           </h1>
           <p className="mb-6">{CONTENT[siteConfig.site_lang].description}</p>
           <Link href="/">
-            <ThemeButton asChild sizes="sm">
+            <ThemeButton divChild sizes="sm">
               {CONTENT[siteConfig.site_lang].button}
             </ThemeButton>
           </Link>

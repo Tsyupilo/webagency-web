@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 
 import { NavbarContainer } from "@/components/blocks/nav/container-navbar";
 import { Footer } from "@/components/blocks/nav/footer";
+import { MobileNotification } from "@/components/blocks/sections/mobile-notification";
 import type { Metadata } from "next";
 
 const font = FontSans({
@@ -55,6 +56,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="mx-auto flex min-h-screen max-w-screen-limit flex-col overflow-hidden">
+            <MobileNotification />
             <header className="fixed left-0 top-0 z-50 w-full">
               <Nav />
             </header>

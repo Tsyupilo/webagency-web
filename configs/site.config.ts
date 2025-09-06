@@ -13,10 +13,10 @@ type SiteConfig = {
 
 export const siteConfig: SiteConfig = {
   site_lang: "ru",
-  site_name: "Web Agency",
+  site_name: "wwwizards agency",
   site_description: {
-    en: "Digital agency: Web Design & Development, SEO, Marketing, Content and more.",
-    ru: "Агентство: Веб-дизайн и разработка, SEO, маркетинг, контент и многое другое.",
+    en: "Digital agency: Web Design & Development, SEO, Marketing, Content and more",
+    ru: "Уникальные цифровые решения: веб-дизайн, разработка, SEO, маркетинг, контент",
   },
   site_domain: "http://localhost:3000",
 };

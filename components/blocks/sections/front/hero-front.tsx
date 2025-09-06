@@ -61,7 +61,7 @@ export default function HeroFront({ fields }: { fields: HeroFrontProps }) {
                 dangerouslySetInnerHTML={{ __html: fields.description }}
                 initial={{ opacity: 0, y: 20, scale: 0.9, filter: "blur(5px)" }}
                 animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-                transition={{ duration: 0.8, delay: 1.3, ease: "easeOut" }}
+                transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
               ></motion.div>
             </div>
             <HeroFrontButton />
@@ -95,12 +95,12 @@ function HeroFrontTitle({ originTitle }: { originTitle: string }) {
       className="text-balance text-center font-heading text-6xl leading-none tracking-tight text-foreground"
       initial={{ opacity: 0, y: 20, filter: "blur(8px)", scale: 0.8 }}
       animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
-      transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+      transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
     >
       <motion.span
         initial={{ opacity: 0, y: 15, filter: "blur(5px)" }}
         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-        transition={{ duration: 0.7, delay: 0.5 }}
+        transition={{ duration: 0.7, delay: 0.3 }}
       >
         {BLOCK_TITLE[siteConfig.site_lang].start}
       </motion.span>{" "}
@@ -109,7 +109,7 @@ function HeroFrontTitle({ originTitle }: { originTitle: string }) {
         className="relative inline-block text-primary"
         initial={{ opacity: 0, y: 15, filter: "blur(5px)" }}
         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-        transition={{ duration: 0.7, delay: 0.7 }}
+        transition={{ duration: 0.7, delay: 0.5 }}
       >
         <span className="absolute left-1/2 top-1/2 mt-2 h-full w-full -translate-x-1/2 -translate-y-1/2">
           <HeroHighlight />
@@ -127,7 +127,7 @@ function HeroFrontTitle({ originTitle }: { originTitle: string }) {
       <motion.span
         initial={{ opacity: 0, y: 15, filter: "blur(5px)" }}
         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-        transition={{ duration: 0.7, delay: 0.9 }}
+        transition={{ duration: 0.7, delay: 0.7 }}
       >
         {BLOCK_TITLE[siteConfig.site_lang].end}
       </motion.span>
@@ -136,7 +136,7 @@ function HeroFrontTitle({ originTitle }: { originTitle: string }) {
         className="text-primary"
         initial={{ opacity: 0, y: 15, filter: "blur(5px)" }}
         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-        transition={{ duration: 0.7, delay: 1.1 }}
+        transition={{ duration: 0.7, delay: 0.7 }}
       >
         {BLOCK_TITLE[siteConfig.site_lang].end2}
       </motion.span>
@@ -161,7 +161,7 @@ function HeroFrontButton() {
   useEffect(() => {
     setTimeout(() => {
       setStartAnimation(true);
-    }, 1900);
+    }, 1000);
   }, [startAnimation]);
   return (
     <motion.div
@@ -171,7 +171,7 @@ function HeroFrontButton() {
       transition={{
         duration: 0.7,
         ease: "easeOut",
-        delay: 1.5,
+        delay: 0.7,
       }}
     >
       <motion.div
@@ -180,7 +180,7 @@ function HeroFrontButton() {
         transition={{
           duration: 0.7,
           ease: "easeOut",
-          delay: 1.7,
+          delay: 1,
         }}
       >
         <ThemeButton sizes="lg" onClick={() => setDrawerState("open")}>

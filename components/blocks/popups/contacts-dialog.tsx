@@ -49,7 +49,7 @@ export const AvatarGroupDemo = () => {
       {AVATARS.map((avatar, index) => (
         <Avatar
           key={index}
-          className="size-12 rounded-full border-2 border-input"
+          className="size-12 rounded-full border-2 border-input shadow-xl shadow-primary/15 transition duration-300 hover:shadow-2xl hover:shadow-primary/50"
         >
           <AvatarImage src={avatar.src} />
           <AvatarFallback>{avatar.fallback}</AvatarFallback>
@@ -131,9 +131,9 @@ export default function ContactsDialog({
           className="flex flex-col items-center justify-center gap-4"
         >
           <motion.div variants={itemVariants as any}>
-            <DialogHeader className="flex select-none items-center justify-center">
+            <DialogHeader className="flex select-none flex-col items-center justify-center">
               <AnimateIcon animateOnHover={true} animateOnTap={true}>
-                <div className="flex items-center gap-3 text-2xl font-semibold tracking-tighter">
+                <div className="flex items-center gap-3 text-2xl font-semibold tracking-tighter text-primary">
                   <motion.button
                     variants={itemVariants as any}
                     transition={{ delay: 0.3 }}
@@ -153,9 +153,9 @@ export default function ContactsDialog({
                 </div>
               </AnimateIcon>
 
-              <div className="flex flex-col items-center gap-2 text-center text-muted-foreground">
+              <div className="flex flex-col items-center gap-4">
                 <motion.div variants={itemVariants as any}>
-                  <DialogDescription className="text-center text-base">
+                  <DialogDescription className="text-basetext-accent-foreground text-center">
                     Наша команада поможет ответить на все ваши вопросы
                   </DialogDescription>
                 </motion.div>

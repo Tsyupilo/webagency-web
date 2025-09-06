@@ -1,21 +1,25 @@
 "use client";
-import type { ButtonProps } from "@/components/ui/button";
 import { AnimateIcon } from "@/components/ui/icons/icon";
 import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
 import React from "react";
 import { HoverBorderGradient } from "../../ui/hover-border-gradient";
 
-interface ParticleButtonProps extends ButtonProps {
+interface ParticleButtonProps {
   onSuccess?: () => void;
+  children?: React.ReactNode;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  className?: string;
   iconType?: string;
   successDuration?: number;
   sizes?: "sm" | "md" | "lg";
-  asChild?: boolean;
+  divChild?: boolean;
+  variant?: "default" | "outline";
+  fillWidth?: boolean;
 }
 
 const themeButtonVariants = cva(
-  "flex items-center space-x-2 bg-primary px-16 py-3 font-heading text-xl uppercase text-background",
+  "flex items-center space-x-2 font-heading uppercase",
   {
     variants: {
       sizes: {
@@ -23,9 +27,14 @@ const themeButtonVariants = cva(
         md: "px-6 py-3 text-base",
         lg: "px-16 py-3 text-lg",
       },
+      variant: {
+        default: "bg-primary text-background",
+        outline: "bg-background text-primary ",
+      },
     },
     defaultVariants: {
       sizes: "md",
+      variant: "default",
     },
   },
 );
@@ -37,8 +46,10 @@ export default function ThemeButton({
   iconType,
   successDuration = 1000,
   className,
+  variant,
   sizes,
-  asChild,
+  divChild,
+  fillWidth = false,
   ...props
 }: ParticleButtonProps) {
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -55,9 +66,10 @@ export default function ThemeButton({
   return (
     <HoverBorderGradient
       containerClassName="rounded-full"
-      as={asChild ? "div" : "button"}
-      className={cn(themeButtonVariants({ sizes, className }))}
+      as={divChild ? "div" : "button"}
+      className={cn(themeButtonVariants({ sizes, variant, className }))}
       onClick={handleClick}
+      fillWidth={fillWidth}
       {...props}
     >
       <AnimateIcon animateOnHover>
