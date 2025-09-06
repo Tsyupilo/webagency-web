@@ -92,6 +92,11 @@ const config = {
           dark: "hsl(var(--card-dark))",
           light: "hsl(var(--card-light))",
         },
+        socials: {
+          telegram: "#2AABEE",
+          whatsapp: "#25D366",
+          vk: "#0077FF",
+        },
       },
       boxShadow: {
         "button-default": "0 0 1.5rem 0.6rem rgba(209,252,214,0.15)",

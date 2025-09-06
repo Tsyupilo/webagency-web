@@ -1,6 +1,7 @@
 import "./globals.css";
 
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/react";
 import { Days_One as FontHeading, Nunito as FontSans } from "next/font/google";
 
@@ -53,7 +54,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="max-w-screen-limit mx-auto flex min-h-screen flex-col">
+          <div className="mx-auto flex min-h-screen max-w-screen-limit flex-col">
             <header className="fixed left-0 top-0 z-50 w-full">
               <Nav />
             </header>
@@ -62,6 +63,7 @@ export default function RootLayout({
               <Footer />
             </footer>
           </div>
+          <Toaster />
         </ThemeProvider>
         <Analytics />
       </body>

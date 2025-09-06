@@ -1,9 +1,11 @@
 "use client";
 
 import { HeroHighlight } from "@/components/assets/textures/hero-highlight";
+import { HeroRays } from "@/components/assets/textures/hero-rays";
+import ContactsDialog from "@/components/blocks/popups/contacts-dialog";
+import ContactsDrawer from "@/components/blocks/popups/contacts-drawer";
 import ThemeButton from "@/components/theme/ui/theme-button";
 import { MessageCircleIcon } from "@/components/ui/icons/message-circle-icon";
-import LightRays from "@/components/ui/light-rays";
 import SplitText from "@/components/ui/split-text";
 import { siteConfig } from "@/configs/site.config";
 import { Gift } from "lucide-react";
@@ -25,31 +27,20 @@ export default function HeroFront({ fields }: { fields: HeroFrontProps }) {
   if (!fields) return null;
 
   return (
-    <section data-slot="hero" className="pt-header-xl relative">
+    <section data-slot="hero" className="relative pt-header-xl">
       <div data-slot="background">
         <motion.div
-          className="absolute left-0 top-0 -z-20 h-full w-full gradient-mask-b-0"
+          className="absolute left-0 top-0 -z-20 h-full w-full origin-top gradient-mask-b-0"
           initial={{
             opacity: 0,
             filter: "blur(8px)",
             scale: 0.8,
             y: -140,
           }}
-          animate={{ opacity: 1, filter: "blur(0px)", scale: 1, y: 0 }}
+          animate={{ opacity: 1, filter: "blur(0px)", scale: 1.5, y: 0 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
         >
-          <LightRays
-            raysOrigin="top-center"
-            raysColor="#AED7E8"
-            raysSpeed={0.8}
-            lightSpread={1}
-            rayLength={1.2}
-            followMouse={false}
-            mouseInfluence={0.1}
-            noiseAmount={0.1}
-            distortion={0.05}
-            className="custom-rays"
-          />
+          <HeroRays />
         </motion.div>
       </div>
 
@@ -73,7 +64,6 @@ export default function HeroFront({ fields }: { fields: HeroFrontProps }) {
                 transition={{ duration: 0.8, delay: 1.3, ease: "easeOut" }}
               ></motion.div>
             </div>
-
             <HeroFrontButton />
           </div>
         </div>
@@ -156,6 +146,8 @@ function HeroFrontTitle({ originTitle }: { originTitle: string }) {
 
 function HeroFrontButton() {
   const [startAnimation, setStartAnimation] = useState(false);
+  const [drawerState, setDrawerState] = useState<"open" | "closed">("closed");
+  const [dialogState, setDialogState] = useState<"open" | "closed">("closed");
   const BLOCK_DESCRIPTION = {
     ru: {
       title: "Обсудим ваш проект",
@@ -191,10 +183,19 @@ function HeroFrontButton() {
           delay: 1.7,
         }}
       >
-        <ThemeButton>
+        <ThemeButton onClick={() => setDrawerState("open")}>
           {BLOCK_DESCRIPTION[siteConfig.site_lang].title}
           <MessageCircleIcon size={20} />
         </ThemeButton>
+        <ContactsDrawer
+          currentState={drawerState}
+          setCurrentState={setDrawerState}
+          setDialogState={setDialogState}
+        />
+        <ContactsDialog
+          currentState={dialogState}
+          setCurrentState={setDialogState}
+        />
       </motion.div>
       {/* startAnimation el */}
       <motion.div
