@@ -55,7 +55,7 @@ export const MenuItem = ({
                 <motion.div
                   transition={transition}
                   layoutId="active" // layoutId ensures smooth animation
-                  className="overflow-hidden rounded-2xl border border-white/20 bg-card shadow-xl backdrop-blur"
+                  className="overflow-hidden rounded-2xl border border-white/20 bg-card shadow-inner shadow-accent/30"
                 >
                   <motion.div
                     layout // layout ensures smooth animation
@@ -161,7 +161,7 @@ export const MenuItemExpand = ({
                 <motion.div
                   transition={transition}
                   layoutId="active" // layoutId ensures smooth animation
-                  className="overflow-hidden rounded-2xl border border-white/20 bg-card shadow-xl"
+                  className="overflow-hidden rounded-2xl border border-white/20 bg-card shadow-inner shadow-accent/30"
                 >
                   <motion.div
                     layout // layout ensures smooth animation
@@ -228,10 +228,10 @@ export const CategoryItem = ({
     <button
       onClick={() => setActive(tag)}
       className={cn(
-        "flex items-center gap-2 rounded-lg border border-white/0 p-4",
+        "group/category flex items-center gap-2 rounded-lg border border-white/20 bg-card-dark p-4 transition-colors duration-300",
         active === tag
           ? "border-white/20 bg-card-dark"
-          : "hover:bg-card-dark/20",
+          : "hover:bg-card-dark/40",
       )}
     >
       <img
@@ -244,8 +244,10 @@ export const CategoryItem = ({
       <div>
         <h4
           className={cn(
-            "text-balance text-left text-lg font-bold leading-tight",
-            active === tag ? "text-foreground" : "text-muted-foreground",
+            "text-balance text-left text-lg font-bold leading-tight text-muted-foreground transition-colors duration-300",
+            active === tag
+              ? "text-primary"
+              : "group-hover/category:text-accent-foreground",
           )}
         >
           {title}

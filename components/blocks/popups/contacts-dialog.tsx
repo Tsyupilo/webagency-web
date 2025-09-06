@@ -16,40 +16,41 @@ interface ContactsDialogProps extends React.HTMLAttributes<HTMLDivElement> {
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { AvatarGroup, AvatarGroupTooltip } from "@/components/ui/avatar-group";
+import { AnimateIcon } from "@/components/ui/icons/icon";
+import { MessageCircleHeart } from "@/components/ui/icons/message-circle-heart-icon";
+import { motion } from "motion/react";
 
 const AVATARS = [
   {
-    src: "https://pbs.twimg.com/profile_images/1909615404789506048/MTqvRsjo_400x400.jpg",
+    src: "/images/avatar-web.jpg",
     fallback: "SK",
-    tooltip: "Skyleen",
+    tooltip: "Помогу с разработкой сайта",
   },
   {
-    src: "https://pbs.twimg.com/profile_images/1593304942210478080/TUYae5z7_400x400.jpg",
+    src: "/images/avatar-seo.jpg",
     fallback: "CN",
-    tooltip: "Shadcn",
+    tooltip: "Помогу с продвижением и SEO",
   },
   {
-    src: "https://pbs.twimg.com/profile_images/1677042510839857154/Kq4tpySA_400x400.jpg",
-    fallback: "AW",
-    tooltip: "Adam Wathan",
-  },
-  {
-    src: "https://pbs.twimg.com/profile_images/1783856060249595904/8TfcCN0r_400x400.jpg",
+    src: "/images/avatar-ad.jpg",
     fallback: "GR",
-    tooltip: "Guillermo Rauch",
+    tooltip: "Помогу настроить рекламу",
   },
   {
-    src: "https://pbs.twimg.com/profile_images/1534700564810018816/anAuSfkp_400x400.jpg",
-    fallback: "JH",
-    tooltip: "Jhey",
+    src: "/images/avatar-content.jpg",
+    fallback: "AW",
+    tooltip: "Помогу сделать хороший контент",
   },
 ];
 
 export const AvatarGroupDemo = () => {
   return (
-    <AvatarGroup className="h-12 -space-x-3">
+    <AvatarGroup side="bottom" className="h-12 -space-x-3">
       {AVATARS.map((avatar, index) => (
-        <Avatar key={index} className="border-3 size-12 border-background">
+        <Avatar
+          key={index}
+          className="size-12 rounded-full border-2 border-input"
+        >
           <AvatarImage src={avatar.src} />
           <AvatarFallback>{avatar.fallback}</AvatarFallback>
           <AvatarGroupTooltip>
@@ -59,6 +60,56 @@ export const AvatarGroupDemo = () => {
       ))}
     </AvatarGroup>
   );
+};
+
+const dialogVariants = {
+  hidden: {
+    y: "100%",
+    opacity: 0,
+    rotateX: 5,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 30,
+    },
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    rotateX: 0,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 30,
+      mass: 0.8,
+      staggerChildren: 0.07,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: {
+    y: -24,
+    filter: "blur(4px)",
+    opacity: 0,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 30,
+    },
+  },
+  visible: {
+    y: 0,
+    filter: "blur(0px)",
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 30,
+      mass: 0.8,
+    },
+  },
 };
 
 export default function ContactsDialog({
@@ -73,13 +124,55 @@ export default function ContactsDialog({
       open={currentState === "open"}
     >
       <DialogContent overlayTransparent={overlayTransparent}>
-        <DialogHeader>
-          <DialogTitle>Create Your Event</DialogTitle>
-          <DialogDescription>
-            Fill out the form below to create and customize your upcoming event
-          </DialogDescription>
-        </DialogHeader>
-        <ContactsForm />
+        <motion.div
+          variants={dialogVariants as any}
+          initial="hidden"
+          animate="visible"
+          className="flex flex-col items-center justify-center gap-4"
+        >
+          <motion.div variants={itemVariants as any}>
+            <DialogHeader className="flex select-none items-center justify-center">
+              <AnimateIcon animateOnHover={true} animateOnTap={true}>
+                <div className="flex items-center gap-3 text-2xl font-semibold tracking-tighter">
+                  <motion.button
+                    variants={itemVariants as any}
+                    transition={{ delay: 0.3 }}
+                    type="button"
+                  >
+                    <MessageCircleHeart className="size-8" />
+                  </motion.button>
+                  <motion.div
+                    variants={itemVariants as any}
+                    transition={{ delay: 0.5 }}
+                    className="text-4xl font-bold"
+                  >
+                    <DialogTitle className="text-4xl font-bold tracking-tighter">
+                      Оставить заявку
+                    </DialogTitle>
+                  </motion.div>
+                </div>
+              </AnimateIcon>
+
+              <div className="flex flex-col items-center gap-2 text-center text-muted-foreground">
+                <motion.div variants={itemVariants as any}>
+                  <DialogDescription className="text-center text-base">
+                    Наша команада поможет ответить на все ваши вопросы
+                  </DialogDescription>
+                </motion.div>
+                <motion.div
+                  variants={itemVariants as any}
+                  transition={{ delay: 0.7 }}
+                >
+                  <AvatarGroupDemo />
+                </motion.div>
+              </div>
+            </DialogHeader>
+          </motion.div>
+
+          <motion.div variants={itemVariants as any} transition={{ delay: 1 }}>
+            <ContactsForm />
+          </motion.div>
+        </motion.div>
       </DialogContent>
     </Dialog>
   );

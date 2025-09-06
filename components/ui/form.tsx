@@ -82,7 +82,7 @@ function FormItem({
     <FormItemContext.Provider value={{ id }}>
       <div
         data-slot="form-item"
-        className={cn("flex flex-col gap-2.5", className)}
+        className={cn("relative flex flex-col gap-2.5", className)}
         data-invalid={!!error}
         {...props}
       />
@@ -139,7 +139,10 @@ function FormDescription({
     <div
       data-slot="form-description"
       id={formDescriptionId}
-      className={cn("-mt-0.5 text-xs text-muted-foreground", className)}
+      className={cn(
+        "absolute right-4 top-1 -z-10 h-fit w-max rounded-xl bg-muted/50 px-2 py-1 pb-4 text-center text-xs font-normal text-muted-foreground",
+        className,
+      )}
       {...props}
     />
   );
@@ -161,7 +164,10 @@ function FormMessage({
     <div
       data-slot="form-message"
       id={formMessageId}
-      className={cn("-mt-0.5 text-xs font-normal text-destructive", className)}
+      className={cn(
+        "absolute right-4 top-1 -z-10 h-fit w-max rounded-xl bg-destructive/50 px-2 py-1 pb-4 text-center text-xs font-normal text-destructive-foreground",
+        className,
+      )}
       {...props}
     >
       {body}

@@ -426,8 +426,8 @@ export function Navbar({ className }: { className?: string }) {
             </MenuLink>
           ))}
         </div>
-        <div className="hidden w-48 items-center justify-end gap-2.5 lg:flex">
-          <TooltipProvider openDelay={0}>
+        <div className="hidden w-48 items-center justify-end lg:flex">
+          <TooltipProvider openDelay={0} closeDelay={0}>
             {NAVBAR_LIST.socials.map((social, index) => (
               <SocialIcon key={index} social={social} />
             ))}
@@ -456,6 +456,7 @@ function SocialIcon({
           href={social.href}
           onMouseEnter={handleHover}
           onMouseLeave={handleHover}
+          className="px-1"
         >
           <IconComponent
             className="size-10"

@@ -1,22 +1,42 @@
-import { Section, Container } from "@/components/craft";
-import { Button } from "@/components/ui/button";
+import ThemeButton from "@/components/theme/ui/theme-button";
+import { siteConfig } from "@/configs/site.config";
 
 import Link from "next/link";
 
+const CONTENT = {
+  en: {
+    title: "Page Not Found",
+    description: "Sorry, the page you are looking for does not exist.",
+    button: "Return Home",
+  },
+  ru: {
+    title: "Страница не найдена",
+    description: "Извините, страница, которую вы ищете, не существует.",
+    button: "Вернуться на главную",
+  },
+};
+
 export default function NotFound() {
   return (
-    <Section>
-      <Container>
-        <div className="flex flex-col items-center justify-center min-h-[50vh] text-center">
-          <h1 className="text-4xl font-bold mb-4">404 - Page Not Found</h1>
-          <p className="mb-8">
-            Sorry, the page you are looking for does not exist.
+    <section>
+      <div className="container mx-auto">
+        <div className="relative flex min-h-[90vh] flex-col items-center justify-center text-center">
+          <p className="absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 select-none font-heading text-[25rem] text-primary opacity-5">
+            <span style={{ textShadow: "0 0 48px hsla(var(--primary) / 0.8)" }}>
+              404
+            </span>
           </p>
-          <Button asChild className="not-prose mt-6">
-            <Link href="/">Return Home</Link>
-          </Button>
+          <h1 className="mb-2 text-4xl font-bold">
+            {CONTENT[siteConfig.site_lang].title}
+          </h1>
+          <p className="mb-6">{CONTENT[siteConfig.site_lang].description}</p>
+          <Link href="/">
+            <ThemeButton asChild sizes="sm">
+              {CONTENT[siteConfig.site_lang].button}
+            </ThemeButton>
+          </Link>
         </div>
-      </Container>
-    </Section>
+      </div>
+    </section>
   );
 }

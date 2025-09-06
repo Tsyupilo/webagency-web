@@ -183,7 +183,7 @@ function HeroFrontButton() {
           delay: 1.7,
         }}
       >
-        <ThemeButton onClick={() => setDrawerState("open")}>
+        <ThemeButton sizes="lg" onClick={() => setDrawerState("open")}>
           {BLOCK_DESCRIPTION[siteConfig.site_lang].title}
           <MessageCircleIcon size={20} />
         </ThemeButton>

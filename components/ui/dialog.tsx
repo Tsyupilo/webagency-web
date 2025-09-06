@@ -121,16 +121,20 @@ function DialogContent({
     <AnimatePresence>
       {isOpen && (
         <DialogPortal forceMount data-slot="dialog-portal">
-          <DialogOverlay asChild forceMount>
+          <DialogOverlay
+            asChild
+            forceMount
+            className={cn(
+              "backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+              overlayTransparent ? "bg-background/0" : "bg-background/80",
+            )}
+          >
             <motion.div
               key="dialog-overlay"
               initial={{ opacity: 0, filter: "blur(4px)" }}
               animate={{ opacity: 1, filter: "blur(0px)" }}
               exit={{ opacity: 0, filter: "blur(4px)" }}
               transition={{ duration: 0.2, ease: "easeInOut" }}
-              className={cn(
-                overlayTransparent ? "bg-background/0" : "bg-background/50",
-              )}
             />
           </DialogOverlay>
           <DialogPrimitive.Content asChild forceMount {...props}>
@@ -147,23 +151,23 @@ function DialogContent({
                 initial={{
                   opacity: 0,
                   filter: "blur(4px)",
-                  transform: `perspective(500px) ${rotateAxis}(${initialRotation}) scale(0.8) translateY(-50%)`,
+                  transform: `perspective(420px) ${rotateAxis}(${initialRotation}) scale(0.8) translateY(-50%)`,
                 }}
                 animate={{
                   opacity: 1,
                   filter: "blur(0px)",
-                  transform: `perspective(500px) ${rotateAxis}(0deg) scale(1)`,
+                  transform: `perspective(420px) ${rotateAxis}(0deg) scale(1)`,
                 }}
                 exit={{
                   opacity: 0,
                   filter: "blur(4px)",
-                  transform: `perspective(500px) ${rotateAxis}(${initialRotation}) scale(0.8)`,
+                  transform: `perspective(420px) ${rotateAxis}(${initialRotation}) scale(0.8)`,
                 }}
                 transition={transition}
-                className="grid w-full translate-x-[-50%] translate-y-[-50%] gap-4 rounded-xl border bg-background p-6 shadow-lg"
+                className="grid w-full translate-x-[-50%] translate-y-[-50%] gap-4 rounded-[2rem] border bg-card/5 p-8 pt-12 shadow-inner shadow-accent/30 backdrop-blur-2xl"
               >
                 {children}
-                <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+                <DialogPrimitive.Close className="absolute right-6 top-6 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
                   <X className="h-4 w-4" />
                   <span className="sr-only">Close</span>
                 </DialogPrimitive.Close>

@@ -18,6 +18,7 @@ type AvatarProps = TooltipProps & {
   zIndex: number;
   transition: Transition;
   translate: string | number;
+  side?: "top" | "bottom" | "left" | "right";
 };
 
 function AvatarContainer({
@@ -25,10 +26,11 @@ function AvatarContainer({
   zIndex,
   transition,
   translate,
+  side = "top",
   ...props
 }: AvatarProps) {
   return (
-    <Tooltip {...props}>
+    <Tooltip {...props} side={side}>
       <TooltipTrigger>
         <motion.div
           data-slot="avatar-container"
@@ -65,6 +67,7 @@ type AvatarGroupProps = Omit<React.ComponentProps<"div">, "translate"> & {
   invertOverlap?: boolean;
   translate?: string | number;
   tooltipProps?: Omit<TooltipProps, "children">;
+  side?: "top" | "bottom" | "left" | "right";
 };
 
 function AvatarGroup({
@@ -73,8 +76,9 @@ function AvatarGroup({
   className,
   transition = { type: "spring", stiffness: 300, damping: 17 },
   invertOverlap = false,
-  translate = "-30%",
-  tooltipProps = { side: "top", sideOffset: 24 },
+  translate = "-12%",
+  side = "top",
+  tooltipProps = { side: "top", sideOffset: 14 },
   ...props
 }: AvatarGroupProps) {
   return (
@@ -93,6 +97,7 @@ function AvatarGroup({
             }
             transition={transition}
             translate={translate}
+            side={side}
             {...tooltipProps}
           >
             {child}

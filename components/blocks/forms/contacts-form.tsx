@@ -1,7 +1,7 @@
 "use client";
 
+import ThemeButton from "@/components/theme/ui/theme-button";
 import { Alert, AlertIcon, AlertTitle } from "@/components/ui/alert";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -10,19 +10,20 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Send } from "@/components/ui/icons/send-icon";
+import { Input, InputWrapper, PhoneInput } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, Building2, Ghost, Mail, Phone } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
 const FormSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  phone: z.string().min(10, "Please enter a valid phone number"),
-  email: z.string().email("Please enter a valid email address"),
-  company: z.string().min(2, "Company name must be at least 2 characters"),
+  name: z.string().min(2, "Минимум 2 символа"),
+  phone: z.string().min(12, "Неверный формат"),
+  email: z.string().email("Неверный формат"),
+  company: z.string().optional(),
   comment: z.string().optional(),
 });
 
@@ -57,21 +58,25 @@ const ContactsForm = () => {
   return (
     <div className="not-prose mx-auto w-full">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <div className="grid gap-4 md:grid-cols-2">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Ваше имя</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Введите ваше имя" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Как вас зовут?</FormLabel>
+                <FormControl>
+                  <InputWrapper>
+                    <Ghost />
+                    <Input placeholder="Джон" {...field} />
+                  </InputWrapper>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <div className="grid gap-2 md:grid-cols-2">
             <FormField
               control={form.control}
               name="phone"
@@ -79,43 +84,44 @@ const ContactsForm = () => {
                 <FormItem>
                   <FormLabel>Телефон</FormLabel>
                   <FormControl>
-                    <Input placeholder="Введите номер телефона" {...field} />
+                    <InputWrapper>
+                      <Phone />
+                      <PhoneInput country="RU" {...field} />
+                    </InputWrapper>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-2">
             <FormField
               control={form.control}
               name="email"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>E-mail</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Введите email адрес" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="company"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Название компании</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Введите название компании" {...field} />
-                  </FormControl>
+                  <InputWrapper>
+                    <Mail />
+                    <Input placeholder="my.mail@example.ru" {...field} />
+                  </InputWrapper>
                   <FormMessage />
                 </FormItem>
               )}
             />
           </div>
-
+          <FormField
+            control={form.control}
+            name="company"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Название компании</FormLabel>
+                <InputWrapper>
+                  <Building2 />
+                  <Input placeholder="Magic Laboratories Inc." {...field} />
+                </InputWrapper>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <FormField
             control={form.control}
             name="comment"
@@ -124,7 +130,7 @@ const ContactsForm = () => {
                 <FormLabel>Комментарий</FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="Введите ваш комментарий..."
+                    placeholder="Задайте вопрос, что вас интересует..."
                     rows={3}
                     {...field}
                   />
@@ -134,11 +140,10 @@ const ContactsForm = () => {
             )}
           />
 
-          <div className="flex justify-end space-x-4">
-            <Button type="button" variant="outline" onClick={handleReset}>
-              Сбросить
-            </Button>
-            <Button type="submit">Отправить</Button>
+          <div className="flex justify-center space-x-4">
+            <ThemeButton type="submit">
+              Отправить <Send size={16} />
+            </ThemeButton>
           </div>
         </form>
       </Form>

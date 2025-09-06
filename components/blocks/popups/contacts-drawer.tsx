@@ -12,7 +12,10 @@
 
 import * as React from "react";
 
-import { TelegramIcon } from "@/components/assets/icons/socials/telegram";
+import {
+  TelegramIcon,
+  WhatsAppIcon,
+} from "@/components/assets/icons/socials/telegram";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -122,12 +125,12 @@ export default function ContactsDrawer({
       onOpenChange={(open) => setCurrentState(open ? "open" : "closed")}
       open={currentState === "open"}
     >
-      <DrawerContent className="mx-auto max-w-fit !rounded-t-[2rem] bg-card-dark p-8 pt-12 shadow-inner shadow-accent/30 dark:bg-card-dark">
+      <DrawerContent className="mx-auto max-w-fit">
         <motion.div
           variants={drawerVariants as any}
           initial="hidden"
           animate="visible"
-          className="mx-auto w-full max-w-lg space-y-2"
+          className="mx-auto w-full max-w-md space-y-2"
         >
           <motion.div variants={itemVariants as any}>
             <DrawerHeader className="space-y-2.5 px-0">
@@ -141,16 +144,15 @@ export default function ContactsDrawer({
                       variants={itemVariants as any}
                       className="text-4xl font-bold"
                     >
-                      Выберите способ связи
+                      Давайте пообщаемся
                     </motion.span>
                   </div>
                 </AnimateIcon>
               </DrawerTitle>
               <motion.div variants={itemVariants as any}>
                 <DrawerDescription className="text-base">
-                  Вы можете оставить заявку, указав свои контактные
-                  данные&nbsp;в&nbsp;форме, либо перейдите
-                  в&nbsp;наш&nbsp;тг-бот и&nbsp;начните чат
+                  Просто оставьте заявку через нашу контактную форму,
+                  либо&nbsp;начните чат в Telegram или WhatsApp
                 </DrawerDescription>
               </motion.div>
             </DrawerHeader>
@@ -158,36 +160,62 @@ export default function ContactsDrawer({
 
           <motion.div variants={itemVariants as any}>
             <DrawerFooter className="flex flex-col gap-3 px-0">
-              <div className="w-full">
-                <Link
-                  href="https://t.me/wwwizards"
-                  target="_blank"
-                  className="bg-socials-telegram/100 hover:brightness-120 group relative inline-flex h-12 w-full items-center justify-center overflow-hidden rounded-full font-heading text-lg tracking-wide text-accent-foreground transition-all duration-500"
+              <Link
+                href="https://t.me/wwwizards"
+                target="_blank"
+                className="hover:brightness-120 group relative inline-flex h-12 w-full items-center justify-center overflow-hidden rounded-full bg-socials-telegram/100 font-heading text-base leading-none tracking-wide text-accent-foreground transition-all duration-500"
+              >
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                  className="relative flex items-center gap-2 uppercase tracking-tighter"
                 >
+                  Начать чат в Telegram
                   <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                    className="relative flex items-center gap-2 uppercase tracking-tighter"
+                    animate={{
+                      rotate: [0, 15, -15, 0],
+                      y: [0, -2, 2, 0],
+                    }}
+                    transition={{
+                      duration: 2,
+                      ease: "easeInOut",
+                      repeat: Number.POSITIVE_INFINITY,
+                      repeatDelay: 1,
+                    }}
                   >
-                    Начать чат в Telegram
-                    <motion.div
-                      animate={{
-                        rotate: [0, 15, -15, 0],
-                        y: [0, -2, 2, 0],
-                      }}
-                      transition={{
-                        duration: 2,
-                        ease: "easeInOut",
-                        repeat: Number.POSITIVE_INFINITY,
-                        repeatDelay: 1,
-                      }}
-                    >
-                      <TelegramIcon bgColor="transparent" className="size-10" />
-                    </motion.div>
+                    <TelegramIcon bgColor="transparent" className="size-10" />
                   </motion.div>
-                </Link>
-              </div>
+                </motion.div>
+              </Link>
+              <Link
+                href="https://wa.me/79819063818"
+                target="_blank"
+                className="hover:brightness-120 group relative inline-flex h-12 w-full items-center justify-center overflow-hidden rounded-full bg-socials-whatsapp/100 font-heading text-base leading-none tracking-wide text-accent-foreground transition-all duration-500"
+              >
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                  className="relative flex items-center gap-2 uppercase tracking-tighter"
+                >
+                  Начать чат в WhatsApp
+                  <motion.div
+                    animate={{
+                      rotate: [0, 15, -15, 0],
+                      y: [0, -2, 2, 0],
+                    }}
+                    transition={{
+                      duration: 2,
+                      ease: "easeInOut",
+                      repeat: Number.POSITIVE_INFINITY,
+                      repeatDelay: 1,
+                    }}
+                  >
+                    <WhatsAppIcon bgColor="transparent" className="size-10" />
+                  </motion.div>
+                </motion.div>
+              </Link>
               {setDialogState && (
                 <Button
                   variant="outline"
@@ -195,7 +223,7 @@ export default function ContactsDrawer({
                     setDialogState("open");
                     setCurrentState("closed");
                   }}
-                  className="font-regular h-12 w-full rounded-full font-heading text-lg uppercase tracking-tighter transition-colors hover:bg-card"
+                  className="font-regular h-12 w-full rounded-full font-heading text-base uppercase tracking-tighter transition-colors hover:bg-card"
                 >
                   Оставить заявку
                 </Button>

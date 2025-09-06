@@ -54,7 +54,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="mx-auto flex min-h-screen max-w-screen-limit flex-col">
+          <div className="mx-auto flex min-h-screen max-w-screen-limit flex-col overflow-hidden">
             <header className="fixed left-0 top-0 z-50 w-full">
               <Nav />
             </header>
