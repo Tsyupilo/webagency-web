@@ -138,7 +138,7 @@ export default function ContactsDrawer({
             <DrawerHeader className="space-y-2.5 px-0">
               <DrawerTitle>
                 <AnimateIcon animateOnHover={true} animateOnTap={true}>
-                  <div className="flex items-center gap-3 text-2xl font-semibold tracking-tighter text-primary">
+                  <div className="flex items-center gap-3 text-2xl font-bold tracking-tighter text-accent-foreground">
                     <motion.div variants={itemVariants as any}>
                       <MessageCircle className="size-8" />
                     </motion.div>

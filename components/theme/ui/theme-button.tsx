@@ -19,7 +19,7 @@ interface ParticleButtonProps {
 }
 
 const themeButtonVariants = cva(
-  "flex items-center space-x-2 font-heading uppercase",
+  "flex items-center space-x-2 font-heading font-medium uppercase",
   {
     variants: {
       sizes: {

@@ -4,15 +4,17 @@ import { siteConfig } from "@/configs/site.config";
 import Link from "next/link";
 
 const CONTENT = {
-  en: {
-    title: "Page Not Found",
-    description: "Sorry, the page you are looking for does not exist.",
-    button: "Return Home",
+  title: {
+    en: "Page Not Found",
+    ru: "Страница не найдена",
   },
-  ru: {
-    title: "Страница не найдена",
-    description: "Извините, страница, которую вы ищете, не существует.",
-    button: "Вернуться на главную",
+  description: {
+    en: "Sorry, the page you are looking for does not exist.",
+    ru: "Извините, страница, которую вы ищете, не существует.",
+  },
+  button: {
+    en: "Return Home",
+    ru: "Вернуться на главную",
   },
 };
 
@@ -27,12 +29,12 @@ export default function NotFound() {
             </span>
           </p>
           <h1 className="mb-2 text-4xl font-bold">
-            {CONTENT[siteConfig.site_lang].title}
+            {CONTENT.title[siteConfig.site_lang]}
           </h1>
-          <p className="mb-6">{CONTENT[siteConfig.site_lang].description}</p>
+          <p className="mb-6">{CONTENT.description[siteConfig.site_lang]}</p>
           <Link href="/">
             <ThemeButton divChild sizes="sm">
-              {CONTENT[siteConfig.site_lang].button}
+              {CONTENT.button[siteConfig.site_lang]}
             </ThemeButton>
           </Link>
         </div>

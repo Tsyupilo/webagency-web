@@ -1,3 +1,7 @@
+import AboutFront, {
+  AboutFrontProps,
+} from "@/components/blocks/sections/front/about-front";
+import HeroCardsFront from "@/components/blocks/sections/front/hero-cards-front";
 import HeroFront, {
   HeroFrontProps,
 } from "@/components/blocks/sections/front/hero-front";
@@ -83,6 +87,8 @@ export default async function Page() {
   return (
     <div className="flex flex-col">
       <HeroFront fields={page.acf.hero_banner as HeroFrontProps} />
+      <HeroCardsFront />
+      <AboutFront fields={page.acf.about as AboutFrontProps} />
     </div>
   );
 }

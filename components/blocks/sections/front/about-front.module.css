@@ -1,0 +1,138 @@
+:root {
+  --lg-bg-color: rgba(255, 255, 255, 0.25);
+  --lg-highlight: rgba(255, 255, 255, 0.75);
+  --lg-text: #ffffff;
+  --lg-hover-glow: rgba(255, 255, 255, 0.4);
+  --lg-shadow: rgba(0, 0, 0, 0.2);
+  --lg-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+}
+
+/* ========== GLASS CONTAINER ========== */
+.glassContainer {
+  position: relative;
+  display: flex;
+  font-weight: 600;
+  color: var(--lg-text);
+  cursor: pointer;
+  background: transparent;
+  border-radius: 999rem;
+  overflow: hidden;
+  box-shadow:
+    0 6px 6px var(--lg-shadow),
+    0 0 20px rgba(0, 0, 0, 0.1);
+  transition: var(--lg-transition);
+  will-change: transform, box-shadow, padding;
+  width: 100%;
+  height: 100%;
+  min-height: 20rem;
+  min-width: 20rem;
+}
+
+.glassContainer:hover {
+  padding: 0.2rem;
+  border-radius: 9999rem;
+  transform: scale(1.02);
+  box-shadow:
+    0 8px 8px rgba(0, 0, 0, 0.25),
+    0 0 25px rgba(0, 0, 0, 0.15);
+}
+
+/* ========== GLASS LAYERS ========== */
+.glassFilter {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  backdrop-filter: blur(0px);
+  filter: url(#lg-dist);
+  isolation: isolate;
+}
+
+.glassOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--lg-bg-color);
+}
+
+.glassSpecular {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: 9999rem;
+  overflow: hidden;
+  box-shadow:
+    inset 1px 1px 0 var(--lg-highlight),
+    inset 0 0 5px var(--lg-highlight);
+}
+
+.glassContent {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  transition: var(--lg-transition);
+  width: 100%;
+  height: 100%;
+}
+
+.glassContainer:hover .glassContent {
+  padding: 2.2rem;
+}
+
+/* ========== MOBILE RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .glassContainer {
+    min-height: 15rem;
+    min-width: 15rem;
+  }
+
+  .glassContent {
+    padding: 1.5rem;
+  }
+
+  .glassContainer:hover .glassContent {
+    padding: 1.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .glassContainer {
+    min-height: 12rem;
+    min-width: 12rem;
+  }
+
+  .glassContent {
+    padding: 1rem;
+  }
+
+  .glassContainer:hover .glassContent {
+    padding: 1.2rem;
+  }
+}
+
+/* ========== PERFORMANCE OPTIMIZATIONS ========== */
+@media (prefers-reduced-motion: reduce) {
+  .glassContainer,
+  .glassContent {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ========== ACCESSIBILITY ========== */
+@media (prefers-contrast: high) {
+  :root {
+    --lg-bg-color: rgba(255, 255, 255, 0.4);
+    --lg-highlight: rgba(255, 255, 255, 0.9);
+    --lg-text: #ffffff;
+  }
+}
+
+/* Focus states for keyboard navigation */
+.glassContainer:focus-visible {
+  outline: 2px solid var(--lg-highlight);
+  outline-offset: 2px;
+}

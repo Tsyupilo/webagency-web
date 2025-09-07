@@ -27,8 +27,8 @@ export default function HeroFront({ fields }: { fields: HeroFrontProps }) {
   if (!fields) return null;
 
   return (
-    <section data-slot="hero" className="relative pt-header-xl">
-      <div data-slot="background">
+    <section className="relative pt-header-xl">
+      <div>
         <motion.div
           className="absolute left-0 top-0 -z-20 h-full w-full origin-top gradient-mask-b-0"
           initial={{
@@ -44,15 +44,9 @@ export default function HeroFront({ fields }: { fields: HeroFrontProps }) {
         </motion.div>
       </div>
 
-      <div data-slot="container" className="container mx-auto h-full py-front">
-        <div
-          data-slot="content"
-          className="flex h-full w-full flex-col items-center justify-center gap-6"
-        >
-          <div
-            data-slot="heading"
-            className="flex w-full flex-col items-center justify-center gap-12"
-          >
+      <div className="py-front-banner container mx-auto h-full">
+        <div className="flex h-full w-full flex-col items-center justify-center gap-6">
+          <div className="flex w-full flex-col items-center justify-center gap-12">
             <div className="relative flex flex-col items-center gap-6">
               <HeroFrontTitle originTitle={fields.title} />
               <motion.div
@@ -74,23 +68,26 @@ export default function HeroFront({ fields }: { fields: HeroFrontProps }) {
 
 function HeroFrontTitle({ originTitle }: { originTitle: string }) {
   const BLOCK_TITLE = {
-    ru: {
-      start: "Мы делаем",
-      target: "сайты, ",
-      end: "которые приводят клиентов.",
-      end2: "Быстро.",
+    start: {
+      en: "We create",
+      ru: "Мы делаем",
     },
-    en: {
-      start: "We create",
-      target: "websites, ",
-      end: "that bring customers.",
-      end2: "Fast.",
+    target: {
+      en: "websites, ",
+      ru: "сайты, ",
+    },
+    end: {
+      en: "that bring customers.",
+      ru: "которые приводят клиентов.",
+    },
+    end2: {
+      en: "Fast.",
+      ru: "Быстро.",
     },
   };
 
   return (
     <motion.h1
-      data-slot="title"
       data-title={originTitle}
       className="text-balance text-center font-heading text-6xl leading-none tracking-tight text-foreground"
       initial={{ opacity: 0, y: 20, filter: "blur(8px)", scale: 0.8 }}
@@ -102,7 +99,7 @@ function HeroFrontTitle({ originTitle }: { originTitle: string }) {
         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
         transition={{ duration: 0.7, delay: 0.3 }}
       >
-        {BLOCK_TITLE[siteConfig.site_lang].start}
+        {BLOCK_TITLE.start[siteConfig.site_lang]}
       </motion.span>{" "}
       {"\n"}
       <motion.span
@@ -121,7 +118,7 @@ function HeroFrontTitle({ originTitle }: { originTitle: string }) {
           }}
           transition={{ duration: 2, repeat: Infinity, repeatDelay: 4 }}
         >
-          {BLOCK_TITLE[siteConfig.site_lang].target}
+          {BLOCK_TITLE.target[siteConfig.site_lang]}
         </motion.span>
       </motion.span>{" "}
       <motion.span
@@ -129,7 +126,7 @@ function HeroFrontTitle({ originTitle }: { originTitle: string }) {
         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
         transition={{ duration: 0.7, delay: 0.7 }}
       >
-        {BLOCK_TITLE[siteConfig.site_lang].end}
+        {BLOCK_TITLE.end[siteConfig.site_lang]}
       </motion.span>
       {"\n"}{" "}
       <motion.span
@@ -138,7 +135,7 @@ function HeroFrontTitle({ originTitle }: { originTitle: string }) {
         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
         transition={{ duration: 0.7, delay: 0.7 }}
       >
-        {BLOCK_TITLE[siteConfig.site_lang].end2}
+        {BLOCK_TITLE.end2[siteConfig.site_lang]}
       </motion.span>
     </motion.h1>
   );
@@ -149,13 +146,13 @@ function HeroFrontButton() {
   const [drawerState, setDrawerState] = useState<"open" | "closed">("closed");
   const [dialogState, setDialogState] = useState<"open" | "closed">("closed");
   const BLOCK_DESCRIPTION = {
-    ru: {
-      title: "Обсудим ваш проект",
-      description: "Бесплатная консультация, составление брифа и ТЗ",
+    title: {
+      en: "Discuss your project",
+      ru: "Обсудим ваш проект",
     },
-    en: {
-      title: "Discuss your project",
-      description: "Get free consultation, brief and project plan",
+    description: {
+      en: "Get free consultation, brief and project plan",
+      ru: "Бесплатная консультация, составление брифа и ТЗ",
     },
   };
   useEffect(() => {
@@ -184,7 +181,7 @@ function HeroFrontButton() {
         }}
       >
         <ThemeButton sizes="lg" onClick={() => setDrawerState("open")}>
-          {BLOCK_DESCRIPTION[siteConfig.site_lang].title}
+          {BLOCK_DESCRIPTION.title[siteConfig.site_lang]}
           <MessageCircleIcon size={20} />
         </ThemeButton>
         <ContactsDrawer
@@ -206,7 +203,7 @@ function HeroFrontButton() {
       >
         <Gift size={14} className="text-primary" />{" "}
         <SplitText
-          text={BLOCK_DESCRIPTION[siteConfig.site_lang].description}
+          text={BLOCK_DESCRIPTION.description[siteConfig.site_lang]}
           delay={40}
           duration={0.1}
           ease="power3.out"

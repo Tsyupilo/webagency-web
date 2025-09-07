@@ -1,30 +1,15 @@
 import { cn } from "@/lib/utils";
-import { motion } from "motion/react";
 
 export const Logo = ({ className }: { className?: string }) => {
   return (
-    <motion.svg
-      initial={{
-        filter: "drop-shadow(0 0 0px hsla(var(--primary) / 0))",
-        color: "hsl(var(--white))",
-      }}
-      whileHover={{
-        filter:
-          "drop-shadow(0 0 12px hsla(var(--primary) / 0.5)) brightness(1)",
-        color: "hsl(var(--primary))",
-      }}
-      transition={{
-        duration: 0.5,
-        type: "tween",
-        ease: "easeInOut",
-      }}
+    <svg
       width="173"
       height="26"
       viewBox="0 0 173 26"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={cn(
-        "h-auto w-40 text-white transition-all duration-500",
+        "hover:drop-shadow-primary h-auto w-40 text-white transition-all duration-500 hover:text-primary hover:shadow-primary",
         className,
       )}
     >
@@ -74,6 +59,6 @@ export const Logo = ({ className }: { className?: string }) => {
           />
         </clipPath>
       </defs>
-    </motion.svg>
+    </svg>
   );
 };

@@ -36,11 +36,33 @@ const FOOTER_CONTENT = {
     en: "Call us or write to us on the email. We will answer all your questions in detail",
     ru: "Пишите в любое время 24/7",
   },
+  we_in: {
+    en: "We in",
+    ru: "Мы в",
+  },
 };
 
 const Footer = () => {
   return (
-    <section className="container mx-auto flex w-full flex-col gap-4 py-16">
+    <motion.section
+      initial={{
+        opacity: 0,
+        y: "5%",
+        scale: 0.98,
+        filter: "blur(4px)",
+      }}
+      animate={{
+        opacity: 1,
+        y: "0",
+        scale: 1,
+        filter: "blur(0px)",
+      }}
+      transition={{
+        duration: 0.5,
+        ease: "easeInOut",
+      }}
+      className="container mx-auto flex w-full flex-col gap-4 py-16"
+    >
       <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-12">
         <div className="col-span-3 flex w-full items-start gap-12">
           <FooterInfo />
@@ -53,7 +75,7 @@ const Footer = () => {
         </div>
       </div>
       <FooterCopyright />
-    </section>
+    </motion.section>
   );
 };
 
@@ -92,7 +114,7 @@ const FooterSocials = () => {
     <>
       <div className="flex flex-col items-end gap-2">
         <a
-          className="font-heading text-lg leading-none tracking-tight transition-colors hover:text-primary"
+          className="font-heading text-lg leading-none tracking-tight transition duration-300 hover:text-primary hover:drop-shadow-primary"
           target="_blank"
           href={`tel:${contactLinks.phone[siteConfig.site_lang].replace(/ /g, "")}`}
         >
@@ -104,7 +126,7 @@ const FooterSocials = () => {
       </div>
       <div className="flex flex-col items-end gap-2">
         <a
-          className="tracking-tigh font-heading text-lg leading-none transition-colors hover:text-primary"
+          className="font-heading text-lg leading-none tracking-tight transition duration-300 hover:text-primary hover:drop-shadow-primary"
           target="_blank"
           href={`mailto:${contactLinks.email[siteConfig.site_lang].replace(/ /g, "")}`}
         >
@@ -138,7 +160,9 @@ const FooterSocials = () => {
               </motion.div>
             </TooltipTrigger>
             <TooltipContent>
-              <strong>Мы в Telegram</strong>
+              <strong>
+                {FOOTER_CONTENT.we_in[siteConfig.site_lang]} Telegram
+              </strong>
             </TooltipContent>
           </Tooltip>
           <Tooltip side="bottom" sideOffset={12}>
@@ -163,7 +187,9 @@ const FooterSocials = () => {
               </motion.div>
             </TooltipTrigger>
             <TooltipContent>
-              <strong>Мы в WhatsApp</strong>
+              <strong>
+                {FOOTER_CONTENT.we_in[siteConfig.site_lang]} WhatsApp
+              </strong>
             </TooltipContent>
           </Tooltip>
           <Tooltip side="bottom" sideOffset={12}>
@@ -188,7 +214,7 @@ const FooterSocials = () => {
               </motion.div>
             </TooltipTrigger>
             <TooltipContent>
-              <strong>Мы в VK</strong>
+              <strong>{FOOTER_CONTENT.we_in[siteConfig.site_lang]} VK</strong>
             </TooltipContent>
           </Tooltip>
           <Tooltip side="bottom" sideOffset={12}>
