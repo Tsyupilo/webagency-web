@@ -27,7 +27,7 @@ export default function HeroFront({ fields }: { fields: HeroFrontProps }) {
   if (!fields) return null;
 
   return (
-    <section className="relative pt-header-xl">
+    <section className="relative">
       <div>
         <motion.div
           className="absolute left-0 top-0 -z-20 h-full w-full origin-top gradient-mask-b-0"
@@ -44,7 +44,7 @@ export default function HeroFront({ fields }: { fields: HeroFrontProps }) {
         </motion.div>
       </div>
 
-      <div className="py-front-banner container mx-auto h-full">
+      <div className="container mx-auto flex h-screen max-h-[60rem] min-h-[50rem] flex-col items-center justify-center">
         <div className="flex h-full w-full flex-col items-center justify-center gap-6">
           <div className="flex w-full flex-col items-center justify-center gap-12">
             <div className="relative flex flex-col items-center gap-6">

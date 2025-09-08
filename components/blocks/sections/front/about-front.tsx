@@ -7,7 +7,6 @@ import GradientText from "@/components/ui/gradient-text";
 import { AnimateIcon } from "@/components/ui/icons/icon";
 import { Lightbulb } from "@/components/ui/icons/lightbulb-icon";
 import Iridescence from "@/components/ui/iridescence";
-import SiriOrb from "@/components/ui/siri-orb";
 import { siteConfig } from "@/configs/site.config";
 import { cn } from "@/lib/utils";
 import { motion, Transition, Variants } from "motion/react";
@@ -16,10 +15,10 @@ import Link from "next/link";
 
 const blockVariants: Variants = {
   hidden: {
-    y: 20,
+    y: 10,
     opacity: 0,
     filter: "blur(4px)",
-    scale: 0.9,
+    scale: 0.98,
   },
   visible: {
     y: 0,
@@ -194,52 +193,25 @@ const AboutFrontBox = ({ cards }: { cards: AboutFrontProps["cards"] }) => {
           "mask-image-about-front-box overflow-hidden rounded-2xl border border-white/20",
         )}
       >
-        <Iridescence
-          color={[0.5, 0.7, 1]}
-          mouseReact={false}
-          amplitude={3}
-          speed={0.3}
-        />
-        <div className="absolute inset-0 z-10 flex items-center justify-center">
-          <motion.span
-            initial={{
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              transformPerspective: "0",
-              filter:
-                "brightness(1) hue-rotate(0deg) drop-shadow(0 0 0 hsla((var(--black)) / 0))",
-            }}
-            whileHover={{
-              y: -20,
-              transformOrigin: "center",
-              filter: "brightness(1.4) hue-rotate(90deg)",
-              transform: `rotateY(0) scale(0.9) translateY(1rem) `,
-            }}
-            whileTap={{
-              y: -20,
-              transformOrigin: "center",
-              filter: "brightness(1.4) hue-rotate(90deg)",
-              transform: `rotateY(0) scale(0.8) translateY(1.9rem) `,
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 100,
-              damping: 10,
-              mass: 1.67,
-            }}
-          >
-            <SiriOrb
-              size={"192px"}
-              animationDuration={20}
-              colors={{
-                bg: "var(--color-primary)",
-              }}
-              className="rounded-full border-[1rem] border-white/30 drop-shadow-2xl backdrop-blur-lg"
-            />
-          </motion.span>
+        <div className="absolute inset-0 z-0">
+          <Iridescence
+            color={[0.4, 0.5, 0.7]}
+            mouseReact={false}
+            amplitude={3}
+            speed={0.3}
+          />
         </div>
-        <div className="absolute bottom-0 left-1/2 z-10 mb-8 -translate-x-1/2">
+        {/* <div className="absolute inset-0 z-10 flex items-center justify-center">
+          <SiriOrb
+            size={"128px"}
+            animationDuration={20}
+            colors={{
+              bg: "var(--color-primary)",
+            }}
+            className="rounded-full border-8 border-white/30 drop-shadow-2xl backdrop-blur-lg"
+          />
+        </div> */}
+        <div className="absolute left-1/2 top-1/2 z-10 mt-8 -translate-x-1/2 -translate-y-1/2">
           <CardStack items={cards} offset={10} scaleFactor={0.06} />
         </div>
       </div>

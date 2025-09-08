@@ -41,14 +41,14 @@ export const CardStack = ({
   };
 
   return (
-    <div className="md:w-100 relative h-32 w-60">
+    <div className="md:w-128 relative h-36 w-60 select-none">
       {cards.map((card, index) => {
         return (
           <motion.a
             href={card.link}
             target="_blank"
             key={card.link}
-            className="absolute flex h-32 w-full flex-col justify-between gap-4 rounded-3xl border border-white/20 bg-card-light/25 p-4 shadow-xl shadow-black/[0.1] backdrop-blur-2xl"
+            className="drop-shadow-black absolute flex h-36 w-full flex-col justify-between gap-4 rounded-3xl border border-white/20 bg-card/[0.02] p-4 shadow-black/10 backdrop-blur-3xl"
             style={{
               transformOrigin: "top center",
             }}
@@ -59,14 +59,14 @@ export const CardStack = ({
             }}
           >
             <div
-              className="line-clamp-2 text-sm font-normal italic text-accent-foreground"
+              className="line-clamp-3 text-sm font-normal italic leading-snug text-accent-foreground"
               dangerouslySetInnerHTML={{ __html: card.description }}
             ></div>
             <div className="flex flex-col gap-1">
-              <p className="text-xs font-medium text-accent-foreground">
+              <p className="text-sm font-semibold text-accent-foreground">
                 {card.name}
               </p>
-              <p className="text-xs font-normal text-muted-foreground">
+              <p className="text-xs font-normal text-accent-foreground">
                 {card.category}
               </p>
             </div>

@@ -251,7 +251,7 @@ const FooterSocials = () => {
 const FooterMenu = () => {
   return (
     <>
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-4">
         <h5 className="text-base font-medium text-muted-foreground">
           {menuHeadings.about[siteConfig.site_lang]}
         </h5>
@@ -267,7 +267,7 @@ const FooterMenu = () => {
           ))}
         </ul>
       </div>
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-4">
         <h5 className="text-base font-medium text-muted-foreground">
           {menuHeadings.services[siteConfig.site_lang]}
         </h5>

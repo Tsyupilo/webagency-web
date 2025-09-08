@@ -8,13 +8,12 @@ import Link from "next/link";
 
 const cardsVariants = {
   hidden: {
-    y: 20,
+    y: 10,
     opacity: 0,
     filter: "blur(4px)",
-    scale: 0.9,
+    scale: 0.96,
     transition: {
       duration: 0.5,
-      delay: 0.3,
       ease: "easeInOut",
     },
   },
@@ -23,7 +22,6 @@ const cardsVariants = {
     opacity: 1,
     filter: "blur(0px)",
     scale: 1,
-    rotate: 0,
     transition: {
       duration: 0.5,
       ease: "easeInOut",

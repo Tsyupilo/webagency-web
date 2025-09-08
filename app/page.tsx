@@ -5,6 +5,8 @@ import HeroCardsFront from "@/components/blocks/sections/front/hero-cards-front"
 import HeroFront, {
   HeroFrontProps,
 } from "@/components/blocks/sections/front/hero-front";
+import ServicesTextureFront from "@/components/blocks/sections/front/services-texture-front";
+import ServicesGrid from "@/components/blocks/sections/global/services-grid";
 import { siteConfig } from "@/configs/site.config";
 import { getAllPages, getPageBySlug } from "@/lib/wordpress";
 
@@ -82,13 +84,19 @@ export default async function Page() {
 
   const page = await getPageBySlug(slug);
 
-  console.log(page.acf.hero_banner);
-
   return (
     <div className="flex flex-col">
+      {/**
+       * FRONT BLOCKS
+       */}
       <HeroFront fields={page.acf.hero_banner as HeroFrontProps} />
       <HeroCardsFront />
       <AboutFront fields={page.acf.about as AboutFrontProps} />
+      <ServicesTextureFront />
+      {/**
+       * GLOBAL BLOCKS
+       */}
+      <ServicesGrid space="front" />
     </div>
   );
 }
